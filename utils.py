@@ -24,31 +24,37 @@ class FHDay:
         self.dinner, self.snacks = [], []
         self.breakfast_sum, self.lunch_sum = 0, 0
         self.dinner_sum, self.snacks_sum = 0, 0
+        self.total = 0
 
     def AddBreakfast(self, a_Product):
         # a_Product of type FHProduct
         self.breakfast.append(a_Product)
         self.breakfast_sum += a_Product.value
+        self.total += a_Product.value
 
     def AddLunch(self, a_Product):
         # a_Product of type FHProduct
         self.lunch.append(a_Product)
         self.lunch_sum += a_Product.value
+        self.total += a_Product.value
 
     def AddDinner(self, a_Product):
         # a_Product of type FHProduct
         self.dinner.append(a_Product)
         self.dinner_sum += a_Product.value
+        self.total += a_Product.value
 
     def AddSnack(self, a_Product):
         # a_Product of type FHProduct
         self.snacks.append(a_Product)
         self.snacks_sum += a_Product.value
+        self.total += a_Product.value
 
     def __str__(self):
         return 'breakfast: {}, total: {}; \n\
 lunch: {}, total: {}; \n\
 dinner: {}, total: {}; \n\
-snacks: {}, total: {};'.format(self.breakfast, self.breakfast_sum,
+snacks: {}, total: {}; \n\
+TOTAL: {}.'.format(self.breakfast, self.breakfast_sum,
                 self.lunch, self.lunch_sum, self.dinner, self.dinner_sum,
-                self.snacks, self.snacks_sum)
+                self.snacks, self.snacks_sum, self.total)
