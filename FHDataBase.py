@@ -7,6 +7,11 @@ class FHProductsDataBase(FHDataBase):
         super().__init__()
         # { product_name + '_' + product_company : calories }
     
+    def __new__(self):
+        if not hasattr(self, 'instance'):
+            self.instance = super(FHProductsDataBase, self).__new__(self)
+        return self.instance
+
     def __getitem__(self, key):
         if key in self.database:
             return self.database[key]
