@@ -1,4 +1,4 @@
-from FHDataBase import FHProductsDataBase
+from FHDataBase import FHProductsDataBase, FHPersonalDataBase
 from utils import FHProduct, FHDay
 
 def ProductsDBExample_SimpleCompanyProduct(a_DataBase):
@@ -14,6 +14,7 @@ def ProductsDBExample_SimpleCompanyProduct(a_DataBase):
         a_DataBase[key] = new_calories
     
     print(key, a_DataBase[key])
+    print()
 
 def ProductsDBExample_SimpleProduct(a_DataBase):
     product_name = "Beef"
@@ -26,7 +27,8 @@ def ProductsDBExample_SimpleProduct(a_DataBase):
         a_DataBase[key] = new_calories
     
     print(key, a_DataBase[key])
-
+    print()
+   
 def DayExample(a_DataBase):
     day = FHDay("03.03.20", a_DataBase)
 
@@ -48,12 +50,24 @@ def DayExample(a_DataBase):
     day.AddDinner(dinner)
 
     print(day)
+    print()
+
+    return day
+
+def PersonalDBExample(a_DataBase, day):
+    a_DataBase[day.date] = day
+    
+    a_DataBase.PrintInfo(day.date)
 
 if __name__ == "__main__":
     DataBase = FHProductsDataBase()
     ProductsDBExample_SimpleCompanyProduct(DataBase)
     ProductsDBExample_SimpleProduct(DataBase)
-    DayExample(DataBase)
+    day = DayExample(DataBase)
+
+    PersonalDB = FHPersonalDataBase()
+    PersonalDBExample(PersonalDB, day)
+    
     print()
 
     
