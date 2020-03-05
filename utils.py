@@ -16,9 +16,8 @@ class FHProduct:
         return str(self)
 
 class FHDay:
-    def __init__(self, a_Date, a_ProductBase): 
+    def __init__(self, a_Date): 
         self.date = a_Date
-        self.database = a_ProductBase
 
         self.breakfast, self.lunch = [], []
         self.dinner, self.snacks = [], []
@@ -59,13 +58,22 @@ TOTAL: {}.'.format(self.breakfast, self.breakfast_sum,
                 self.lunch, self.lunch_sum, self.dinner, self.dinner_sum,
                 self.snacks, self.snacks_sum, self.total)
 
+    def __repr__(self):
+        return str(self)
+
 
 def PrintConsoleInfo():
     print('Welcome to FitnessHelper, console version.')
     print('If you would like to add information about food you have eaten, type \'ADD\' and press Enter.')
     print('To stop adding type 0 and press Enter.')
+    print('If you would like to see information about food you have eaten at some date, type \'SHOW\' and press Enter.')
+    print('If you would like to stop everything, type \'END\' and press Enter.')
 
 def PrintAddInfo():
     print('Your input string should be like:')
     print('<date (\'03.03.20\')> <breakfast (\'B\') / lunch (\'L\') / snack (\'S\') / dinner (\'D\') > \
 <product name> <product company> (optional) <calories for 100g> <weight>')
+
+def PrintShowInfo():
+    print('Your input string should be like:')
+    print('<date (\'03.03.20\')> OR \'ALL\'')
