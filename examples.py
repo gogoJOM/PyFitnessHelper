@@ -25,6 +25,15 @@ def ProductsDBExample_SimpleProduct(a_DataBase):
     if calories is None:
         new_calories = 500
         a_DataBase[key] = new_calories
+
+    product_name = "Beef eco"
+    key = a_DataBase.GetKey(product_name)
+
+    calories = a_DataBase[key]
+
+    if calories is None:
+        new_calories = 300
+        a_DataBase[key] = new_calories
     
     print(key, a_DataBase[key])
     print()
@@ -62,12 +71,17 @@ def PersonalDBExample(a_DataBase, day):
 if __name__ == "__main__":
     DataBase = FHProductsDataBase()
     ProductsDBExample_SimpleCompanyProduct(DataBase)
+    DataBase.Save()
+    DataBase = FHProductsDataBase()
+    DataBase.Open()
     ProductsDBExample_SimpleProduct(DataBase)
+    DataBase.Save()
     day = DayExample()
 
-    PersonalDB = FHPersonalDataBase()
+    PersonalDB = FHPersonalDataBase("Anton")
+    PersonalDB.Open()
     PersonalDBExample(PersonalDB, day)
-    
+    PersonalDB.Save()
     print()
 
     

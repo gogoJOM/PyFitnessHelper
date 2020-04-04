@@ -1,3 +1,5 @@
+from utils import FHDay
+
 class FHDataBase:
     def __init__(self):
         self.database = {}
@@ -19,7 +21,27 @@ class FHProductsDataBase(FHDataBase):
             return a_ProductName + '_' + a_ProductCompany
         return a_ProductName
 
+    def Save(self):
+        with open('productbase.txt', 'w') as file:
+            for key in self.database.keys():
+                file.write('{}|{}\n'.format(key, self.database[key]))
+
+    def Open(self):
+        try:
+            with open('productbase.txt', 'r') as file:
+                for line in file:
+                    parts = line.split('|')
+                    key, value = parts[0], parts[1]
+                    self.database[key] = FHDay(key)
+                    self.database[key].total = value
+        except IOError:
+            print("Making new product database")
+
 class FHPersonalDataBase(FHDataBase):
+    def __init__(self, name):
+        FHDataBase.__init__(self)
+        self.name = name
+
     def PrintInfo(self, a_Date):
         print('====== {} ======'.format(a_Date))
         print(self[a_Date])
@@ -27,5 +49,20 @@ class FHPersonalDataBase(FHDataBase):
     def __str__(self):
         return str(self.database)
 
+    def Save(self):
+        with open('{}.txt'.format(self.name), 'w') as file:
+            for key in self.database.keys():
+                file.write('{} | {}\n'.format(key, self.database[key].total))
+
+    def Open(self):
+        try:
+            with open('{}.txt'.format(self.name), 'r') as file:
+                for line in file:
+                    parts = line.split(' | ')
+                    key, value = parts[0], parts[1]
+                    self.database[key].total = value
+        except IOError:
+            print("Making new personal database for {}".format(self.name))
+
 gProductDatabase = FHProductsDataBase()
-gPersonalDatabase = FHPersonalDataBase()
+gPersonalDatabase = FHPersonalDataBase("username")
