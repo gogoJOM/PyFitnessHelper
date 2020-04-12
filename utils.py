@@ -61,6 +61,21 @@ TOTAL: {}.'.format(self.breakfast, self.breakfast_sum,
     def __repr__(self):
         return str(self)
 
+def LoadUsernames():
+    try:
+        with open('usernames.txt', 'r') as file:
+            usernames = []
+            for line in file:
+               usernames.append(line)
+        return usernames
+    except IOError:
+        return []
+
+def SaveUsernames(a_Usernames):
+    with open('usernames.txt', 'w') as file:
+        for username in a_Usernames:
+            file.write(username)
+
 
 def PrintConsoleInfo():
     print('Welcome to FitnessHelper, console version.')

@@ -15,6 +15,9 @@ class FHDataBase:
     def __contains__(self, item):
         return item in self.database
 
+    def keys(self):
+        return self.database.keys()
+
 class FHProductsDataBase(FHDataBase):
     def GetKey(self, a_ProductName, a_ProductCompany=None):
         if a_ProductCompany is not None:
@@ -32,8 +35,7 @@ class FHProductsDataBase(FHDataBase):
                 for line in file:
                     parts = line.split('|')
                     key, value = parts[0], parts[1]
-                    self.database[key] = FHDay(key)
-                    self.database[key].total = value
+                    self.database[key] = value
         except IOError:
             print("Making new product database")
 
@@ -60,6 +62,7 @@ class FHPersonalDataBase(FHDataBase):
                 for line in file:
                     parts = line.split(' | ')
                     key, value = parts[0], parts[1]
+                    self.database[key] = FHDay(key)
                     self.database[key].total = value
         except IOError:
             print("Making new personal database for {}".format(self.name))

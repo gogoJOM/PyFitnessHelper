@@ -1,5 +1,5 @@
 from FHDataBase import FHProductsDataBase, FHPersonalDataBase
-from utils import FHProduct, FHDay
+from utils import FHProduct, FHDay, SaveUsernames
 
 def ProductsDBExample_SimpleCompanyProduct(a_DataBase):
     product_name = "gr"
@@ -83,5 +83,7 @@ if __name__ == "__main__":
     PersonalDBExample(PersonalDB, day)
     PersonalDB.Save()
     print()
+    print(PersonalDB.keys())
+    SaveUsernames(['Anton'])
 
     
