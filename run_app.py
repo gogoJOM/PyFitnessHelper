@@ -2,7 +2,7 @@ from main_window import *
 import sys
 from PyQt5.QtWidgets import QMessageBox
 from FHDataBase import FHProductsDataBase, FHPersonalDataBase
-from utils import FHProduct, FHDay
+from utils import FHProduct, FHDay, LoadUsernames, SaveUsernames
 
 
 row_names = ('Name', 'Age', 'Kilocalories (per day)')
@@ -14,10 +14,13 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.ui.verticalLayoutWidget.hide()
-        self.ui.pushButton_3.clicked.connect(self.ui.verticalLayoutWidget.hide)
-
+        # Load existing usernames
+        self.UserNames = LoadUsernames()
         self.PersonalDB = None
+        self.ui.comboBox.addItem('New')
+        for username in self.UserNames:
+            self.ui.comboBox.addItem(username)
+        self.ui.comboBox.setCurrentIndex(0)
 
         # Table with User info
         self.ui.tableWidget.setRowCount(len(row_names))
@@ -31,7 +34,21 @@ class mywindow(QtWidgets.QMainWindow):
         # Create New User
         self.ui.pushButton_2.clicked.connect(self.btnClicked_CreateUser)
 
+    def save(self):
+        if self.PersonalDB is not None:
+            self.PersonalDB.Save()
+        SaveUsernames(self.UserNames)
+        return
+
     def btnClicked_ChooseUser(self):
+        name = str(self.ui.comboBox.currentText())
+        if name == 'New':
+            QMessageBox.about(self, "Message", "Please, choose existing user")
+        else:
+            if self.PersonalDB is not None:
+                self.PersonalDB.Save()
+            self.PersonalDB = FHPersonalDataBase(name)
+            self.PersonalDB.Open()
         return
 
     def btnClicked_CreateUser(self):
@@ -39,7 +56,10 @@ class mywindow(QtWidgets.QMainWindow):
         if name is None:
             QMessageBox.about(self, "Message", "Please, fill new user name")
         else:
-            name = name.text()
+            if name in self.UserNames:
+                QMessageBox.about(self, "Message", "This user name already exist")
+            else:
+                name = name.text()
         age = self.ui.tableWidget.item(1, 0)
         if age is None:
             QMessageBox.about(self, "Message", "Please, fill new user age")
@@ -50,11 +70,16 @@ class mywindow(QtWidgets.QMainWindow):
             QMessageBox.about(self, "Message", "Please, fill expected amount of kilocalories")
         else:
             kilocalories = int(kilocalories.text())
+        if self.PersonalDB is not None:
+            self.PersonalDB.Save()
         self.PersonalDB = FHPersonalDataBase(name)
+        self.PersonalDB.Open()
+        self.UserNames.append(name)
         return
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     application = mywindow()
     application.show()
-    sys.exit(app.exec_())
+    app.exec()
+    application.save()
