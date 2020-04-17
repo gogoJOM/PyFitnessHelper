@@ -1,6 +1,6 @@
 from main_window import *
 import sys
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QFrame
 from FHDataBase import FHProductsDataBase, FHPersonalDataBase
 from utils import FHProduct, FHDay, LoadUsernames, SaveUsernames
 
@@ -21,6 +21,9 @@ class mywindow(QtWidgets.QMainWindow):
         for username in self.UserNames:
             self.ui.comboBox.addItem(username)
         self.ui.comboBox.setCurrentIndex(0)
+
+        # Hide user form
+        self.ui.formLayoutWidget.hide()
 
         # Table with User info
         self.ui.tableWidget.setRowCount(len(row_names))
@@ -49,6 +52,7 @@ class mywindow(QtWidgets.QMainWindow):
                 self.PersonalDB.Save()
             self.PersonalDB = FHPersonalDataBase(name)
             self.PersonalDB.Open()
+            self.ui.formLayoutWidget.show()
         return
 
     def btnClicked_CreateUser(self):
@@ -75,6 +79,7 @@ class mywindow(QtWidgets.QMainWindow):
         self.PersonalDB = FHPersonalDataBase(name)
         self.PersonalDB.Open()
         self.UserNames.append(name)
+        self.ui.formLayoutWidget.show()
         return
 
 if __name__ == "__main__":
