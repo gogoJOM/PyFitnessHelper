@@ -39,7 +39,7 @@ def ProductsDBExample_SimpleProduct(a_DataBase):
     print()
    
 def DayExample():
-    day = FHDay("03.03.20")
+    day = FHDay("03.03.20", 80)
 
     breakfast = FHProduct("egg", None, 50)
     day.AddBreakfast(breakfast)
@@ -70,6 +70,7 @@ def PersonalDBExample(a_DataBase, day):
 
 if __name__ == "__main__":
     DataBase = FHProductsDataBase()
+    DataBase.Open()
     ProductsDBExample_SimpleCompanyProduct(DataBase)
     DataBase.Save()
     DataBase = FHProductsDataBase()

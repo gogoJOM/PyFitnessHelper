@@ -18,8 +18,9 @@ class FHProduct:
         return str(self)
 
 class FHDay:
-    def __init__(self, a_Date): 
+    def __init__(self, a_Date, a_Weight): 
         self.date = a_Date
+        self.weight = a_Weight
 
         self.breakfast, self.lunch = [], []
         self.dinner, self.snacks = [], []

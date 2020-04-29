@@ -36,6 +36,7 @@ class FHProductsDataBase(FHDataBase):
         try:
             with open('tmp/productbase.txt', 'r') as file:
                 for line in file:
+                    line = line.rstrip('\n')
                     parts = line.split('|')
                     key, value = parts[0], parts[1]
                     self.database[key] = value
@@ -60,17 +61,25 @@ class FHPersonalDataBase(FHDataBase):
         if not os.path.exists('tmp'):
             os.makedirs('tmp')
         with open('tmp/{}.txt'.format(self.name), 'w') as file:
+            file.write('{} {}\n'.format(self.desired_kcal, self.desired_weight))
             for key in self.database.keys():
-                file.write('{} | {}\n'.format(key, self.database[key].total))
+                file.write('{} | {} | {}\n'.format(key, self.database[key].total, self.database[key].weight))
 
     def Open(self):
         try:
             with open('tmp/{}.txt'.format(self.name), 'r') as file:
-                for line in file:
+
+                for i, line in enumerate(file):
+                    line = line.rstrip('\n')
+                    if i == 0:
+                        vls = line.split(' ')
+                        self.desired_kcal, self.desired_weight = vls[0], vls[1]
+                        continue
                     parts = line.split(' | ')
-                    key, value = parts[0], parts[1]
-                    self.database[key] = FHDay(key)
+                    key, value, weight = parts[0], parts[1], parts[2]
+                    self.database[key] = FHDay(key, weight)
                     self.database[key].total = value
+                    self.database[key].weight = weight
         except IOError:
             print("Making new personal database for {}".format(self.name))
 
