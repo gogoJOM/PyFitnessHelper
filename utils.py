@@ -1,3 +1,5 @@
+import os
+
 class FHProduct:
     def __init__(self, a_ProductName, a_ProductCompany, a_Calories):
         self.product_name = a_ProductName
@@ -63,7 +65,7 @@ TOTAL: {}.'.format(self.breakfast, self.breakfast_sum,
 
 def LoadUsernames():
     try:
-        with open('usernames.txt', 'r') as file:
+        with open('tmp/usernames.txt', 'r') as file:
             usernames = []
             for line in file:
                usernames.append(line)
@@ -72,9 +74,11 @@ def LoadUsernames():
         return []
 
 def SaveUsernames(a_Usernames):
-    with open('usernames.txt', 'w') as file:
+    if not os.path.exists('tmp'):
+        os.makedirs('tmp')
+    with open('tmp/usernames.txt', 'w') as file:
         for username in a_Usernames:
-            file.write(username)
+            file.write(username + '\n')
 
 
 def PrintConsoleInfo():
