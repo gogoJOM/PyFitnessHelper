@@ -47,6 +47,7 @@ class mywindow(QtWidgets.QMainWindow):
         name = str(self.ui.comboBox.currentText())
         if name == 'New':
             QMessageBox.about(self, "Message", "Please, choose existing user")
+            self.ui.formLayoutWidget.hide()
         else:
             if self.PersonalDB is not None:
                 self.PersonalDB.Save()
@@ -59,19 +60,27 @@ class mywindow(QtWidgets.QMainWindow):
         name = self.ui.tableWidget.item(0, 0)
         if name is None:
             QMessageBox.about(self, "Message", "Please, fill new user name")
+            self.ui.formLayoutWidget.hide()
+            return
         else:
             if name in self.UserNames:
                 QMessageBox.about(self, "Message", "This user name already exist")
+                self.ui.formLayoutWidget.hide()
+                return
             else:
                 name = name.text()
         age = self.ui.tableWidget.item(1, 0)
         if age is None:
             QMessageBox.about(self, "Message", "Please, fill new user age")
+            self.ui.formLayoutWidget.hide()
+            return
         else:
             age = int(age.text())
         kilocalories = self.ui.tableWidget.item(2, 0)
         if age is None:
             QMessageBox.about(self, "Message", "Please, fill expected amount of kilocalories")
+            self.ui.formLayoutWidget.hide()
+            return
         else:
             kilocalories = int(kilocalories.text())
         if self.PersonalDB is not None:
