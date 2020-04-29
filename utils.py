@@ -18,7 +18,7 @@ class FHProduct:
         return str(self)
 
 class FHDay:
-    def __init__(self, a_Date, a_Weight): 
+    def __init__(self, a_Date=None, a_Weight=None):
         self.date = a_Date
         self.weight = a_Weight
 
@@ -52,6 +52,9 @@ class FHDay:
         self.snacks_sum += a_Product.value
         self.total += a_Product.value
 
+    def SetWeight(self, a_Weight):
+        self.weight = a_Weight
+
     def __str__(self):
         return 'breakfast: {}, total: {}; \n\
 lunch: {}, total: {}; \n\
@@ -69,7 +72,7 @@ def LoadUsernames():
         with open('tmp/usernames.txt', 'r') as file:
             usernames = []
             for line in file:
-               usernames.append(line)
+               usernames.append(line.rstrip('\n'))
         return usernames
     except IOError:
         return []
