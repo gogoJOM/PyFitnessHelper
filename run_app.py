@@ -24,6 +24,11 @@ class mywindow(QtWidgets.QMainWindow):
             self.ui.comboBox.addItem(username)
         self.ui.comboBox.setCurrentIndex(0)
 
+        # Load Product database
+        self.ProductDB = FHProductsDataBase()
+        self.ProductDB.Open()
+        self.init_product_combobox()
+
         # Hide user form
         self.hide_dayinfo_layout()
 
@@ -39,16 +44,34 @@ class mywindow(QtWidgets.QMainWindow):
         # Create New User
         self.ui.pushButton_2.clicked.connect(self.btnClicked_CreateUser)
 
+        # Add product to meal
+        self.ui.pushButton_3.clicked.connect(self.btnClicked_Add)
+
+        # Add product to DB
+        self.ui.pushButton_5.clicked.connect(self.btnClicked_CreateProduct)
+
     def save(self):
         if self.PersonalDB is not None:
             self.PersonalDB.Save()
         SaveUsernames(self.UserNames)
+        self.ProductDB.Save()
         return
 
     def hide_dayinfo_layout(self):
         self.PersonalDB = None
         self.CurrentDay = None
         self.ui.frame.hide()
+        self.ui.new_product_frame = QtWidgets.QFrame()
+        self.ui.new_product_frame.setLayout(self.ui.gridLayout_2)
+        self.ui.new_product_frame.hide()
+        return
+
+    def init_product_combobox(self):
+        self.ui.comboBox_4.addItem('New')
+        items = list(self.ProductDB.keys())
+        for item in items:
+            self.ui.comboBox_4.addItem('{} {}kc/100g'.format(item, self.ProductDB[item]))
+        self.ui.comboBox_4.setCurrentIndex(0)
         return
 
     def btnClicked_ChooseUser(self):
@@ -120,6 +143,17 @@ class mywindow(QtWidgets.QMainWindow):
                 self.ui.comboBox_2.addItem(day)
             self.ui.comboBox_2.setCurrentIndex(len(days) - 1)
         self.ui.frame.show()
+        return
+
+    def btnClicked_Add(self):
+        product = str(self.ui.comboBox_4.currentText())
+        if product == 'New':
+            self.ui.new_product_frame.show()
+        return
+
+    def btnClicked_CreateProduct(self):
+        # product_name
+        self.ui.new_product_frame.hide()
         return
 
 
