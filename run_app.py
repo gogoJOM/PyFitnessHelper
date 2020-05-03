@@ -48,7 +48,7 @@ class mywindow(QtWidgets.QMainWindow):
     def hide_dayinfo_layout(self):
         self.PersonalDB = None
         self.CurrentDay = None
-        self.ui.formLayoutWidget.hide()
+        self.ui.frame.hide()
         return
 
     def btnClicked_ChooseUser(self):
@@ -118,8 +118,8 @@ class mywindow(QtWidgets.QMainWindow):
             self.CurrentDay = self.PersonalDB[today]
             for day in days:
                 self.ui.comboBox_2.addItem(day)
-            self.ui.comboBox_2.setCurrentIndex(len(days)-1)
-        self.ui.formLayoutWidget.show()
+            self.ui.comboBox_2.setCurrentIndex(len(days) - 1)
+        self.ui.frame.show()
         return
 
 
