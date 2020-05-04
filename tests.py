@@ -2,7 +2,7 @@ from utils import FHDay, FHProduct
 from FHDataBase import FHProductsDataBase, FHPersonalDataBase
 
 def test_FHProduct_nocompany():
-    product = FHProduct("SomeProduct", None, 99)
+    product = FHProduct("SomeProduct", 99)
 
     assert product.key == "SomeProduct"
     assert product.value == 99
@@ -12,7 +12,7 @@ def test_FHProduct_nocompany():
     assert str_representation == "SomeProduct (99)"
 
 def test_FHProduct_normal():
-    product = FHProduct("SomeProduct", "SomeCompany", 99)
+    product = FHProduct("SomeProduct", 99, "SomeCompany")
 
     assert product.key == "SomeProduct_SomeCompany"
     assert product.value == 99
@@ -29,7 +29,7 @@ def test_FHDay_breakfast():
     assert day.weight == 200
     assert day.total == 0
 
-    product = FHProduct("BProduct", None, 20)
+    product = FHProduct("BProduct", 20)
 
     day.AddBreakfast(product)
 
@@ -38,7 +38,7 @@ def test_FHDay_breakfast():
     assert str(day.breakfast[0]) == 'BProduct (20)'
     assert day.total == 20
 
-    product = FHProduct("B2Product", None, 30)
+    product = FHProduct("B2Product", 30)
 
     day.AddBreakfast(product)
 
@@ -55,7 +55,7 @@ def test_FHDay_lunch():
     assert day.weight == 200
     assert day.total == 0
 
-    product = FHProduct("LProduct", None, 40)
+    product = FHProduct("LProduct", 40)
 
     day.AddLunch(product)
 
@@ -64,7 +64,7 @@ def test_FHDay_lunch():
     assert str(day.lunch[0]) == 'LProduct (40)'
     assert day.total == 40
 
-    product = FHProduct("L2Product", None, 50)
+    product = FHProduct("L2Product", 50)
 
     day.AddLunch(product)
 
@@ -81,7 +81,7 @@ def test_FHDay_dinner():
     assert day.weight == 200
     assert day.total == 0
 
-    product = FHProduct("DProduct", None, 120)
+    product = FHProduct("DProduct", 120)
 
     day.AddDinner(product)
 
@@ -90,7 +90,7 @@ def test_FHDay_dinner():
     assert str(day.dinner[0]) == 'DProduct (120)'
     assert day.total == 120
 
-    product = FHProduct("D2Product", None, 130)
+    product = FHProduct("D2Product", 130)
 
     day.AddDinner(product)
 
@@ -107,7 +107,7 @@ def test_FHDay_snack():
     assert day.weight == 200
     assert day.total == 0
 
-    product = FHProduct("SProduct", None, 220)
+    product = FHProduct("SProduct", 220)
 
     day.AddSnack(product)
 
@@ -116,7 +116,7 @@ def test_FHDay_snack():
     assert str(day.snacks[0]) == 'SProduct (220)'
     assert day.total == 220
 
-    product = FHProduct("S2Product", None, 230)
+    product = FHProduct("S2Product", 230)
 
     day.AddSnack(product)
 
@@ -133,7 +133,7 @@ def test_FHDay_full():
     assert day.weight == 200
     assert day.total == 0
 
-    product = FHProduct("BProduct", None, 20)
+    product = FHProduct("BProduct", 20)
 
     day.AddBreakfast(product)
 
@@ -142,7 +142,7 @@ def test_FHDay_full():
     assert str(day.breakfast[0]) == 'BProduct (20)'
     assert day.total == 20
 
-    product = FHProduct("LProduct", None, 40)
+    product = FHProduct("LProduct", 40)
 
     day.AddLunch(product)
 
@@ -154,7 +154,7 @@ def test_FHDay_full():
     assert str(day.breakfast[0]) == 'BProduct (20)'
     assert day.total == 60
 
-    product = FHProduct("DProduct", None, 120)
+    product = FHProduct("DProduct", 120)
 
     day.AddDinner(product)
 
@@ -169,7 +169,7 @@ def test_FHDay_full():
     assert str(day.breakfast[0]) == 'BProduct (20)'
     assert day.total == 180
 
-    product = FHProduct("SProduct", None, 220)
+    product = FHProduct("SProduct", 220)
 
     day.AddSnack(product)
     assert day.dinner_sum == 120
@@ -185,6 +185,15 @@ def test_FHDay_full():
     assert str(day.breakfast[0]) == 'BProduct (20)'
     assert str(day.snacks[0]) == 'SProduct (220)'
     assert day.total == 400
+
+    storage = day.GetAll()
+    keys = list(storage.keys())
+    assert len(keys) == 4
+
+    key_breakfast = list(storage['Breakfast'].keys())
+    assert len(key_breakfast) == 1
+    assert str(key_breakfast[0]) == 'BProduct (20)'
+    assert storage['Breakfast'][key_breakfast[0]] == 20 
 
 def test_FHProductsDataBase():
     base = FHProductsDataBase()
@@ -225,16 +234,16 @@ def test_FHPersonalDataBase():
 
     day = FHDay("10.10.2010", 200)
 
-    product = FHProduct("BProduct", None, 20)
+    product = FHProduct("BProduct", 20)
     day.AddBreakfast(product)
 
-    product = FHProduct("LProduct", None, 40)
+    product = FHProduct("LProduct", 40)
     day.AddLunch(product)
 
-    product = FHProduct("DProduct", None, 120)
+    product = FHProduct("DProduct", 120)
     day.AddDinner(product)
 
-    product = FHProduct("SProduct", None, 220)
+    product = FHProduct("SProduct", 220)
     day.AddSnack(product)
 
     base[day.date] = day

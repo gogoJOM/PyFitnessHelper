@@ -28,11 +28,18 @@ class FHDay:
         self.dinner_sum, self.snacks_sum = 0, 0
         self.total = 0
 
+        self.storage = {}
+
     def AddBreakfast(self, a_Product):
         # a_Product of type FHProduct
         self.breakfast.append(a_Product)
         self.breakfast_sum += a_Product.value
         self.total += a_Product.value
+
+        if 'Breakfast' in self.storage.keys():
+            self.storage['Breakfast'][a_Product] = a_Product.value
+        else:
+            self.storage['Breakfast'] = {a_Product : a_Product.value}
 
     def AddLunch(self, a_Product):
         # a_Product of type FHProduct
@@ -40,11 +47,21 @@ class FHDay:
         self.lunch_sum += a_Product.value
         self.total += a_Product.value
 
+        if 'Lunch' in self.storage.keys():
+            self.storage['Lunch'][a_Product] = a_Product.value
+        else:
+            self.storage['Lunch'] = {a_Product : a_Product.value}
+
     def AddDinner(self, a_Product):
         # a_Product of type FHProduct
         self.dinner.append(a_Product)
         self.dinner_sum += a_Product.value
         self.total += a_Product.value
+
+        if 'Dinner' in self.storage.keys():
+            self.storage['Dinner'][a_Product] = a_Product.value
+        else:
+            self.storage['Dinner'] = {a_Product : a_Product.value}
 
     def AddSnack(self, a_Product):
         # a_Product of type FHProduct
@@ -52,8 +69,16 @@ class FHDay:
         self.snacks_sum += a_Product.value
         self.total += a_Product.value
 
+        if 'Snacks' in self.storage.keys():
+            self.storage['Snacks'][a_Product] = a_Product.value
+        else:
+            self.storage['Snacks'] = {a_Product : a_Product.value}
+
     def SetWeight(self, a_Weight):
         self.weight = a_Weight
+
+    def GetAll(self):
+        return self.storage
 
     def __str__(self):
         return 'breakfast: {}, total: {}; \n\

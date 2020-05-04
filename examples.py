@@ -41,21 +41,21 @@ def ProductsDBExample_SimpleProduct(a_DataBase):
 def DayExample():
     day = FHDay("03.03.20", 80)
 
-    breakfast = FHProduct("egg", None, 50)
+    breakfast = FHProduct("egg", 50)
     day.AddBreakfast(breakfast)
 
-    first_snack = FHProduct("choco_bar", "Milka", 200)
+    first_snack = FHProduct("ChocoBar", 200, "Milka")
     day.AddSnack(first_snack)
 
-    lunch = FHProduct("salad", None, 100)
+    lunch = FHProduct("salad", 100)
     day.AddLunch(lunch)
-    lunch = FHProduct("Beef", None, 500)
+    lunch = FHProduct("Beef", 500)
     day.AddLunch(lunch)
 
-    second_snack = FHProduct("jogurt", "Danone", 125)
+    second_snack = FHProduct("jogurt", 125, "Danone")
     day.AddSnack(second_snack)
 
-    dinner = FHProduct("steak", "Miratorg", 550)
+    dinner = FHProduct("steak", 550, "Miratorg")
     day.AddDinner(dinner)
 
     print(day)
