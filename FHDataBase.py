@@ -39,7 +39,7 @@ class FHProductsDataBase(FHDataBase):
                     line = line.rstrip('\n')
                     parts = line.split('|')
                     key, value = parts[0], parts[1]
-                    self.database[key] = value
+                    self.database[key] = int(value)
         except IOError:
             print("Making new product database")
 
@@ -73,13 +73,17 @@ class FHPersonalDataBase(FHDataBase):
                     line = line.rstrip('\n')
                     if i == 0:
                         vls = line.split(' ')
-                        self.desired_kcal, self.desired_weight = vls[0], vls[1]
+                        self.desired_kcal, self.desired_weight = int(vls[0]), int(vls[1])
                         continue
                     parts = line.split(' | ')
                     key, value, weight = parts[0], parts[1], parts[2]
+                    try:
+                        weight = int(weight)
+                    except:
+                        weight = None
                     self.database[key] = FHDay(key, weight)
-                    self.database[key].total = value
-                    self.database[key].weight = weight
+                    self.database[key].total = float(value)
+                    # self.database[key].weight = weight
         except IOError:
             print("Making new personal database for {}".format(self.name))
 

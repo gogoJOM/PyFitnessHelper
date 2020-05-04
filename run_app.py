@@ -5,8 +5,8 @@ from FHDataBase import FHProductsDataBase, FHPersonalDataBase
 from utils import FHProduct, FHDay, LoadUsernames, SaveUsernames
 import datetime
 
-
 row_names = ('Name', 'Desired Weight', 'Kilocalories (per day)')
+meal_names = ('Breakfast', 'Lunch', 'Dinner', 'Snacks')
 
 
 class mywindow(QtWidgets.QMainWindow):
@@ -74,8 +74,7 @@ class mywindow(QtWidgets.QMainWindow):
             self.ui.comboBox_4.addItem('{} {}kc/100g'.format(item, self.ProductDB[item]))
         self.ui.comboBox_4.setCurrentIndex(0)
 
-        meals = ['Breakfast', 'Lunch', 'Dinner', 'Snacks']
-        for item in meals:
+        for item in meal_names:
             self.ui.comboBox_3.addItem(item)
         self.ui.comboBox_3.setCurrentIndex(0)
 
@@ -171,7 +170,7 @@ class mywindow(QtWidgets.QMainWindow):
         product = str(self.ui.comboBox_4.currentText())
         product = ' '.join(product.split(' ')[:-1])
         self.CurrentDay = self.PersonalDB[day]
-        amount = self.ui.spinBox.Value() * self.ProductDB[product]
+        amount = self.ui.spinBox.value() * self.ProductDB[product] / 100
         if amount > 0:
             fh_product = FHProduct(product, amount)
             if meal == 'Breakfast':
@@ -182,7 +181,7 @@ class mywindow(QtWidgets.QMainWindow):
                 self.CurrentDay.AddDinner(fh_product)
             else:
                 self.CurrentDay.AddSnack(fh_product)
-                
+
         return
 
     def btnClicked_CreateProduct(self):
@@ -203,6 +202,13 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.new_product_frame.hide()
         return
 
+    def show_day(self):
+        self.ui.tableWidget1.setRowCount(len(meal_names))
+        self.ui.tableWidget1.setColumnCount(2)
+        self.ui.tableWidget.setVerticalHeaderLabels(meal_names)
+        self.ui.tableWidget.setHorizontalHeaderLabels(['Product names', 'kc'])
+        # if self.PersonalDB is not None and self.CurrentDay is not None:
+        return
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
