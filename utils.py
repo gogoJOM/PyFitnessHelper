@@ -1,7 +1,7 @@
 import os
 
 class FHProduct:
-    def __init__(self, a_ProductName, a_ProductCompany, a_Calories):
+    def __init__(self, a_ProductName, a_Calories, a_ProductCompany=None):
         self.product_name = a_ProductName
         self.product_company = a_ProductCompany
         self.value = a_Calories

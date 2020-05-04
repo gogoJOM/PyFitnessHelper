@@ -61,8 +61,9 @@ class mywindow(QtWidgets.QMainWindow):
         self.PersonalDB = None
         self.CurrentDay = None
         self.ui.frame.hide()
-        self.ui.new_product_frame = QtWidgets.QFrame()
-        self.ui.new_product_frame.setLayout(self.ui.gridLayout_2)
+        if not hasattr(self.ui, 'new_product_frame'):
+            self.ui.new_product_frame = QtWidgets.QFrame()
+            self.ui.new_product_frame.setLayout(self.ui.gridLayout_2)
         self.ui.new_product_frame.hide()
         return
 
@@ -72,6 +73,12 @@ class mywindow(QtWidgets.QMainWindow):
         for item in items:
             self.ui.comboBox_4.addItem('{} {}kc/100g'.format(item, self.ProductDB[item]))
         self.ui.comboBox_4.setCurrentIndex(0)
+
+        meals = ['Breakfast', 'Lunch', 'Dinner', 'Snacks']
+        for item in meals:
+            self.ui.comboBox_3.addItem(item)
+        self.ui.comboBox_3.setCurrentIndex(0)
+
         return
 
     def btnClicked_ChooseUser(self):
@@ -101,27 +108,33 @@ class mywindow(QtWidgets.QMainWindow):
             QMessageBox.about(self, "Message", "Please, fill new user name")
             self.hide_dayinfo_layout()
             return
-        else:
-            if name in self.UserNames:
-                QMessageBox.about(self, "Message", "This user name already exist")
-                self.hide_dayinfo_layout()
-                return
-            else:
-                name = name.text()
+        if name.text() in self.UserNames:
+            QMessageBox.about(self, "Message", "This user name already exist")
+            self.hide_dayinfo_layout()
+            return
+        name = name.text()
         weight = self.ui.tableWidget.item(1, 0)
         if weight is None:
             QMessageBox.about(self, "Message", "Please, fill desired weight")
             self.hide_dayinfo_layout()
             return
-        else:
+        try:
             weight = int(weight.text())
+        except:
+            QMessageBox.about(self, "Message", "Weight is not a number")
+            self.hide_dayinfo_layout()
+            return
         kilocalories = self.ui.tableWidget.item(2, 0)
         if kilocalories is None:
             QMessageBox.about(self, "Message", "Please, fill expected amount of kilocalories")
             self.hide_dayinfo_layout()
             return
-        else:
+        try:
             kilocalories = int(kilocalories.text())
+        except:
+            QMessageBox.about(self, "Message", "Kilocalories is not a number")
+            self.hide_dayinfo_layout()
+            return
         if self.PersonalDB is not None:
             self.PersonalDB.Save()
         self.PersonalDB = FHPersonalDataBase(name, desired_weight=weight, desired_kcal=kilocalories)
@@ -148,11 +161,45 @@ class mywindow(QtWidgets.QMainWindow):
     def btnClicked_Add(self):
         product = str(self.ui.comboBox_4.currentText())
         if product == 'New':
+            self.ui.lineEdit.clear()
+            self.ui.lineEdit_2.clear()
             self.ui.new_product_frame.show()
+            return
+
+        day = str(self.ui.comboBox_2.currentText())
+        meal = str(self.ui.comboBox_3.currentText())
+        product = str(self.ui.comboBox_4.currentText())
+        product = ' '.join(product.split(' ')[:-1])
+        self.CurrentDay = self.PersonalDB[day]
+        amount = self.ui.spinBox.Value() * self.ProductDB[product]
+        if amount > 0:
+            fh_product = FHProduct(product, amount)
+            if meal == 'Breakfast':
+                self.CurrentDay.AddBreakfast(fh_product)
+            elif meal == 'Lunch':
+                self.CurrentDay.AddLunch(fh_product)
+            elif meal == 'Dinner':
+                self.CurrentDay.AddDinner(fh_product)
+            else:
+                self.CurrentDay.AddSnack(fh_product)
+                
         return
 
     def btnClicked_CreateProduct(self):
-        # product_name
+        product_name = self.ui.lineEdit.text()
+        if product_name == '':
+            return
+        if product_name in self.ProductDB:
+            return
+        kc = self.ui.lineEdit_2.text()
+        if kc == '':
+            return
+        try:
+            kc = int(kc)
+        except:
+            return
+        self.ProductDB[product_name] = kc
+        self.ui.comboBox_4.addItem('{} {}kc/100g'.format(product_name, self.ProductDB[product_name]))
         self.ui.new_product_frame.hide()
         return
 
