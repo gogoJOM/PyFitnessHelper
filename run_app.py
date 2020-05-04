@@ -36,7 +36,8 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.tableWidget.setRowCount(len(row_names))
         self.ui.tableWidget.setColumnCount(1)
         self.ui.tableWidget.setVerticalHeaderLabels(row_names)
-        self.ui.tableWidget.setHorizontalHeaderLabels(['Fill values'])
+        self.ui.tableWidget.horizontalHeader().setVisible(False)
+        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
 
         # Choose Excisting User
         self.ui.pushButton.clicked.connect(self.btnClicked_ChooseUser)
@@ -154,6 +155,7 @@ class mywindow(QtWidgets.QMainWindow):
             for day in days:
                 self.ui.comboBox_2.addItem(day)
             self.ui.comboBox_2.setCurrentIndex(len(days) - 1)
+            self.show_day()
         self.ui.frame.show()
         return
 
@@ -203,11 +205,40 @@ class mywindow(QtWidgets.QMainWindow):
         return
 
     def show_day(self):
-        self.ui.tableWidget1.setRowCount(len(meal_names))
-        self.ui.tableWidget1.setColumnCount(2)
-        self.ui.tableWidget.setVerticalHeaderLabels(meal_names)
-        self.ui.tableWidget.setHorizontalHeaderLabels(['Product names', 'kc'])
-        # if self.PersonalDB is not None and self.CurrentDay is not None:
+        self.ui.tableWidget1.clear()
+        self.ui.tableWidget1.setColumnCount(3)
+        self.ui.tableWidget1.setHorizontalHeaderLabels(['', 'Product names', 'kc'])
+
+        if self.PersonalDB is not None and self.CurrentDay is not None:
+            num_rows = 1
+            num_each_meal = []
+
+            num_each_meal.append(0 if len(self.CurrentDay.breakfast) == 0 else len(self.CurrentDay.breakfast) + 1)
+            num_each_meal.append(0 if len(self.CurrentDay.lunch) == 0 else len(self.CurrentDay.lunch) + 1)
+            num_each_meal.append(0 if len(self.CurrentDay.dinner) == 0 else len(self.CurrentDay.dinner) + 1)
+            num_each_meal.append(0 if len(self.CurrentDay.snacks) == 0 else len(self.CurrentDay.snacks) + 1)
+
+            num_rows += sum(num_each_meal)
+            self.ui.tableWidget1.setRowCount(num_rows)
+            self.ui.tableWidget1.verticalHeader().setVisible(False)
+            i_row = 0
+            for i, meal_num in enumerate(num_each_meal):
+                if meal_num > 0:
+                    self.ui.tableWidget1.setSpan(i_row, 0, meal_num - 1, 1)
+                    self.ui.tableWidget1.setItem(i_row, 0, QTableWidgetItem(meal_names[i]))
+                    self.ui.tableWidget1.setItem(i_row + 1, 1, QTableWidgetItem('Total'))
+                    if i == 0:
+                        self.ui.tableWidget1.setItem(i_row + 1, 2, QTableWidgetItem(str(self.CurrentDay.breakfast_sum)))
+                        # for product in self.CurrentDay.breakfast:
+                            
+                i_row += meal_num
+
+            self.ui.tableWidget1.setItem(i_row, 2, QTableWidgetItem(str(self.CurrentDay.total)))
+            self.ui.tableWidget1.setItem(i_row, 1, QTableWidgetItem('Remain {} / {}'.format(
+                max(0, self.PersonalDB.desired_kcal - self.CurrentDay.total), self.PersonalDB.desired_kcal)))
+            header = self.ui.tableWidget1.horizontalHeader()
+            header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+            header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         return
 
 if __name__ == "__main__":
