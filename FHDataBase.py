@@ -64,17 +64,21 @@ class FHPersonalDataBase(FHDataBase):
             file.write('{} {}\n'.format(self.desired_kcal, self.desired_weight))
             for key in self.database.keys():
                 file.write('{} | '.format(key))
-                for breakfast in self.database[key].storage['Breakfast'].keys():
-                    file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
+				if 'Breakfast' in self.database[key].storage.keys():
+                    for breakfast in self.database[key].storage['Breakfast'].keys():
+                        file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
                 file.write(' | ')
-                for breakfast in self.database[key].storage['Lunch'].keys():
-                    file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
+				if 'Lunch' in self.database[key].storage.keys():
+                    for breakfast in self.database[key].storage['Lunch'].keys():
+                        file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
                 file.write(' | ')
-                for breakfast in self.database[key].storage['Dinner'].keys():
-                    file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
+				if 'Dinner' in self.database[key].storage.keys(): 
+                    for breakfast in self.database[key].storage['Dinner'].keys():
+                        file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
                 file.write(' | ')
-                for breakfast in self.database[key].storage['Snacks'].keys():
-                    file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
+				if 'Snacks' in self.database[key].storage.keys(): 
+                    for breakfast in self.database[key].storage['Snacks'].keys():
+                        file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
                 file.write(' | ')
                 file.write('{} | {}\n'.format(self.database[key].total, self.database[key].weight))
 
