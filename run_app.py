@@ -49,10 +49,13 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.pushButton_3.clicked.connect(self.btnClicked_Add)
         
         # Save user data
-        self.ui.pushButton_4.clicked.connect(self.btnClicked_Save)
+        self.ui.pushButton_4.clicked.connect(self.save)
 
         # Add product to DB
         self.ui.pushButton_5.clicked.connect(self.btnClicked_CreateProduct)
+
+        # Update day info
+        self.ui.comboBox_2.currentIndexChanged.connect(self.change_day)
 
     def save(self):
         if self.PersonalDB is not None:
@@ -213,10 +216,20 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.new_product_frame.hide()
         return
 
+    def change_day(self):
+        self.save()
+        day = str(self.ui.comboBox_2.currentText())
+        self.CurrentDay = self.PersonalDB[day]
+        self.show_day()
+        return
+
     def show_day(self):
         self.ui.tableWidget1.clear()
         self.ui.tableWidget1.setColumnCount(3)
         self.ui.tableWidget1.setHorizontalHeaderLabels(['', 'Product names', 'kc'])
+
+        if self.CurrentDay.weight is not None:
+            self.ui.spinBox_2.setValue(self.CurrentDay.weight)
 
         if self.PersonalDB is not None and self.CurrentDay is not None:
             num_rows = 1
@@ -252,10 +265,6 @@ class mywindow(QtWidgets.QMainWindow):
             header = self.ui.tableWidget1.horizontalHeader()
             header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
             header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
-        return
-    
-    def btnClicked_Save(self):
-        self.save()
         return
 
 if __name__ == "__main__":
