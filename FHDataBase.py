@@ -64,19 +64,19 @@ class FHPersonalDataBase(FHDataBase):
             file.write('{} {}\n'.format(self.desired_kcal, self.desired_weight))
             for key in self.database.keys():
                 file.write('{} | '.format(key))
-				if 'Breakfast' in self.database[key].storage.keys():
+                if 'Breakfast' in self.database[key].storage.keys():
                     for breakfast in self.database[key].storage['Breakfast'].keys():
                         file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
                 file.write(' | ')
-				if 'Lunch' in self.database[key].storage.keys():
+                if 'Lunch' in self.database[key].storage.keys():
                     for breakfast in self.database[key].storage['Lunch'].keys():
                         file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
                 file.write(' | ')
-				if 'Dinner' in self.database[key].storage.keys(): 
+                if 'Dinner' in self.database[key].storage.keys():
                     for breakfast in self.database[key].storage['Dinner'].keys():
                         file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
                 file.write(' | ')
-				if 'Snacks' in self.database[key].storage.keys(): 
+                if 'Snacks' in self.database[key].storage.keys():
                     for breakfast in self.database[key].storage['Snacks'].keys():
                         file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
                 file.write(' | ')
@@ -107,7 +107,7 @@ class FHPersonalDataBase(FHDataBase):
                             name, company, calories = components[0], components[1], components[2]
                             if company == 'None':
                                 company = None
-                            self.database[key].AddBreakfast(FHProduct(name, int(calories), company))
+                            self.database[key].AddBreakfast(FHProduct(name, float(calories), company))
 
                     brkfst = lunch.split(',')
                     for product in brkfst:
@@ -116,7 +116,7 @@ class FHPersonalDataBase(FHDataBase):
                             name, company, calories = components[0], components[1], components[2]
                             if company == 'None':
                                 company = None
-                            self.database[key].AddLunch(FHProduct(name, int(calories), company))
+                            self.database[key].AddLunch(FHProduct(name, float(calories), company))
 
                     brkfst = dinner.split(',')
                     for product in brkfst:
@@ -125,7 +125,7 @@ class FHPersonalDataBase(FHDataBase):
                             name, company, calories = components[0], components[1], components[2]
                             if company == 'None':
                                 company = None
-                            self.database[key].AddDinner(FHProduct(name, int(calories), company))
+                            self.database[key].AddDinner(FHProduct(name, float(calories), company))
 
                     brkfst = snacks.split(',')
                     for product in brkfst:
@@ -134,7 +134,7 @@ class FHPersonalDataBase(FHDataBase):
                             name, company, calories = components[0], components[1], components[2]
                             if company == 'None':
                                 company = None
-                            self.database[key].AddSnack(FHProduct(name, int(calories), company))
+                            self.database[key].AddSnack(FHProduct(name, float(calories), company))
 
                     self.database[key].total = float(value)
                     # self.database[key].weight = weight

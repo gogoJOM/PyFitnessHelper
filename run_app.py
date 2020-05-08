@@ -107,8 +107,8 @@ class mywindow(QtWidgets.QMainWindow):
     def show_user_info(self):
         if self.PersonalDB is not None:
             self.ui.tableWidget.setItem(0, 0, QTableWidgetItem(self.PersonalDB.name))
-            self.ui.tableWidget.setItem(1, 0, QTableWidgetItem(self.PersonalDB.desired_weight))
-            self.ui.tableWidget.setItem(2, 0, QTableWidgetItem(self.PersonalDB.desired_kcal))
+            self.ui.tableWidget.setItem(1, 0, QTableWidgetItem(str(self.PersonalDB.desired_weight)))
+            self.ui.tableWidget.setItem(2, 0, QTableWidgetItem(str(self.PersonalDB.desired_kcal)))
         return
 
     def btnClicked_CreateUser(self):
@@ -192,9 +192,8 @@ class mywindow(QtWidgets.QMainWindow):
             else:
                 self.CurrentDay.AddSnack(fh_product)
 
-        self.ui.comboBox_3.setCurrentIndex(0)
         self.ui.comboBox_4.setCurrentIndex(0)
-        self.ui.spinBox.setValue(0)
+        self.ui.spinBox.setValue(100)
         self.show_day()
         return
 
@@ -242,6 +241,7 @@ class mywindow(QtWidgets.QMainWindow):
                     num_each_meal.append(0)
 
             num_rows += sum(num_each_meal)
+            self.ui.tableWidget1.clear()
             self.ui.tableWidget1.setRowCount(num_rows)
             self.ui.tableWidget1.verticalHeader().setVisible(False)
             i_row = 0
@@ -260,7 +260,7 @@ class mywindow(QtWidgets.QMainWindow):
                     i_row += 1
 
             self.ui.tableWidget1.setItem(i_row, 2, QTableWidgetItem(str(self.CurrentDay.total)))
-            self.ui.tableWidget1.setItem(i_row, 1, QTableWidgetItem('Remain {} / {}'.format(
+            self.ui.tableWidget1.setItem(i_row, 1, QTableWidgetItem('Remain {0:9.1f} / {1}'.format(
                 max(0, self.PersonalDB.desired_kcal - self.CurrentDay.total), self.PersonalDB.desired_kcal)))
             header = self.ui.tableWidget1.horizontalHeader()
             header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
