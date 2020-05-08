@@ -148,6 +148,7 @@ class mywindow(QtWidgets.QMainWindow):
             self.PersonalDB.Save()
         self.PersonalDB = FHPersonalDataBase(name, desired_weight=weight, desired_kcal=kilocalories)
         self.UserNames.append(name)
+        self.ui.comboBox.addItem(name)
         self.show_daysDB()
         return
 

@@ -1,0 +1,13 @@
+Milk 1%|42
+Banana|90
+Apple|46
+Avocado|223
+Tomato|19
+Yoghurt 1%|51
+Beef|183
+Chicken|165
+Pork|400
+Egg|157
+Fish|120
+Rice|357
+Cracker|320
