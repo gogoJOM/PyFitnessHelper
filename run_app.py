@@ -47,12 +47,18 @@ class mywindow(QtWidgets.QMainWindow):
 
         # Add product to meal
         self.ui.pushButton_3.clicked.connect(self.btnClicked_Add)
+        
+        # Save user data
+        self.ui.pushButton_4.clicked.connect(self.btnClicked_Save)
 
         # Add product to DB
         self.ui.pushButton_5.clicked.connect(self.btnClicked_CreateProduct)
 
     def save(self):
         if self.PersonalDB is not None:
+            if self.CurrentDay is not None:
+                if self.ui.spinBox_2.value() > 0:
+                    self.CurrentDay.SetWeight(self.ui.spinBox_2.value())
             self.PersonalDB.Save()
         SaveUsernames(self.UserNames)
         self.ProductDB.Save()
@@ -138,7 +144,6 @@ class mywindow(QtWidgets.QMainWindow):
         if self.PersonalDB is not None:
             self.PersonalDB.Save()
         self.PersonalDB = FHPersonalDataBase(name, desired_weight=weight, desired_kcal=kilocalories)
-        self.PersonalDB.Open()
         self.UserNames.append(name)
         self.show_daysDB()
         return
@@ -184,6 +189,10 @@ class mywindow(QtWidgets.QMainWindow):
             else:
                 self.CurrentDay.AddSnack(fh_product)
 
+        self.ui.comboBox_3.setCurrentIndex(0)
+        self.ui.comboBox_4.setCurrentIndex(0)
+        self.ui.spinBox.setValue(0)
+        self.show_day()
         return
 
     def btnClicked_CreateProduct(self):
@@ -213,25 +222,29 @@ class mywindow(QtWidgets.QMainWindow):
             num_rows = 1
             num_each_meal = []
 
-            num_each_meal.append(0 if len(self.CurrentDay.breakfast) == 0 else len(self.CurrentDay.breakfast) + 1)
-            num_each_meal.append(0 if len(self.CurrentDay.lunch) == 0 else len(self.CurrentDay.lunch) + 1)
-            num_each_meal.append(0 if len(self.CurrentDay.dinner) == 0 else len(self.CurrentDay.dinner) + 1)
-            num_each_meal.append(0 if len(self.CurrentDay.snacks) == 0 else len(self.CurrentDay.snacks) + 1)
+            for meal in meal_names:
+                if meal in self.CurrentDay.storage:
+                    num_each_meal.append(0 if len(self.CurrentDay.storage[meal]) == 0 else len(self.CurrentDay.storage[meal]) + 1)
+                else:
+                    num_each_meal.append(0)
 
             num_rows += sum(num_each_meal)
             self.ui.tableWidget1.setRowCount(num_rows)
             self.ui.tableWidget1.verticalHeader().setVisible(False)
             i_row = 0
-            for i, meal_num in enumerate(num_each_meal):
-                if meal_num > 0:
-                    self.ui.tableWidget1.setSpan(i_row, 0, meal_num - 1, 1)
-                    self.ui.tableWidget1.setItem(i_row, 0, QTableWidgetItem(meal_names[i]))
-                    self.ui.tableWidget1.setItem(i_row + 1, 1, QTableWidgetItem('Total'))
-                    if i == 0:
-                        self.ui.tableWidget1.setItem(i_row + 1, 2, QTableWidgetItem(str(self.CurrentDay.breakfast_sum)))
-                        # for product in self.CurrentDay.breakfast:
-                            
-                i_row += meal_num
+            for i_meal, meal in enumerate(meal_names):
+                if num_each_meal[i_meal] > 0:
+                    self.ui.tableWidget1.setSpan(i_row, 0, num_each_meal[i_meal], 1)
+                    self.ui.tableWidget1.setItem(i_row, 0, QTableWidgetItem(meal))
+                    total = 0
+                    for i_product in self.CurrentDay.storage[meal].keys():
+                        self.ui.tableWidget1.setItem(i_row, 1, QTableWidgetItem(i_product.product_name))
+                        self.ui.tableWidget1.setItem(i_row, 2, QTableWidgetItem(str(i_product.value)))
+                        total += i_product.value
+                        i_row += 1
+                    self.ui.tableWidget1.setItem(i_row, 1, QTableWidgetItem('Total'))
+                    self.ui.tableWidget1.setItem(i_row, 2, QTableWidgetItem(str(total)))
+                    i_row += 1
 
             self.ui.tableWidget1.setItem(i_row, 2, QTableWidgetItem(str(self.CurrentDay.total)))
             self.ui.tableWidget1.setItem(i_row, 1, QTableWidgetItem('Remain {} / {}'.format(
@@ -239,6 +252,10 @@ class mywindow(QtWidgets.QMainWindow):
             header = self.ui.tableWidget1.horizontalHeader()
             header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
             header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        return
+    
+    def btnClicked_Save(self):
+        self.save()
         return
 
 if __name__ == "__main__":
