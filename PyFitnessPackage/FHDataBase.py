@@ -1,7 +1,7 @@
 import os
 try:
     from utils import FHDay, FHProduct
-except:
+except Exception:
     from PyFitnessPackage.utils import FHDay, FHProduct
 
 
@@ -12,7 +12,7 @@ class FHDataBase:
     def __getitem__(self, key):
         if key in self.database:
             return self.database[key]
-        return None    
+        return None
 
     def __setitem__(self, key, value):
         self.database[key] = value
@@ -54,7 +54,7 @@ class FHPersonalDataBase(FHDataBase):
         FHDataBase.__init__(self)
         self.name = name
         self.desired_kcal = desired_kcal
-        self.desired_weight = desired_weight 
+        self.desired_weight = desired_weight
 
     def PrintInfo(self, a_Date):
         print('====== {} ======'.format(a_Date))
@@ -67,16 +67,17 @@ class FHPersonalDataBase(FHDataBase):
         if not os.path.exists('tmp'):
             os.makedirs('tmp')
         with open('tmp/{}.txt'.format(self.name), 'w') as file:
-            file.write('{} {}\n'.format(self.desired_kcal, self.desired_weight))
+            file.write('{} {}\n'.format(self.desired_kcal,
+                                        self.desired_weight))
             for key in self.database.keys():
                 file.write('{} | '.format(key))
                 if 'Breakfast' in self.database[key].storage.keys():
                     for breakfast in \
                         self.database[key].storage['Breakfast'].keys():
-                        file.write('{}_{}_{},'.format(
-                            breakfast.product_name,
-                            breakfast.product_company,
-                            breakfast.value))
+                            file.write('{}_{}_{},'.format(
+                                breakfast.product_name,
+                                breakfast.product_company,
+                                breakfast.value))
                 file.write(' | ')
                 if 'Lunch' in self.database[key].storage.keys():
                     for breakfast in \
@@ -123,7 +124,7 @@ class FHPersonalDataBase(FHDataBase):
 
                     try:
                         weight = int(weight)
-                    except:
+                    except Exception:
                         weight = None
                     self.database[key] = FHDay(key, weight)
 

@@ -93,7 +93,7 @@ class Ui_MainWindow(object):
         self.tableWidget1 = QtWidgets.QTableWidget(self.frame)
         self.tableWidget1.setAutoScroll(False)
         self.tableWidget1.setEditTriggers(
-		    QtWidgets.QAbstractItemView.NoEditTriggers)
+            QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget1.setObjectName("tableWidget1")
         self.tableWidget1.setColumnCount(0)
         self.tableWidget1.setRowCount(0)
