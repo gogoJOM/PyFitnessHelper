@@ -4,11 +4,13 @@ try:
     from FHDataBase import FHProductsDataBase, FHPersonalDataBase
     from utils import FHProduct, FHDay, LoadUsernames, SaveUsernames
     import datetime
-except:
+except Exception:
     from PyFitnessPackage.main_window import *
     from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
-    from PyFitnessPackage.FHDataBase import FHProductsDataBase, FHPersonalDataBase
-    from PyFitnessPackage.utils import FHProduct, FHDay, LoadUsernames, SaveUsernames
+    from PyFitnessPackage.FHDataBase import FHProductsDataBase
+    from PyFitnessPackage.FHDataBase import FHPersonalDataBase
+    from PyFitnessPackage.utils import FHProduct, FHDay
+    from PyFitnessPackage.utils import LoadUsernames, SaveUsernames
     import datetime
 
 row_names = ('Name', 'Desired Weight', 'Kilocalories (per day)')
@@ -44,7 +46,7 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.tableWidget.setVerticalHeaderLabels(row_names)
         self.ui.tableWidget.horizontalHeader().setVisible(False)
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(
-		    0, QtWidgets.QHeaderView.Stretch)
+            0, QtWidgets.QHeaderView.Stretch)
 
         # Choose Excisting User
         self.ui.pushButton.clicked.connect(self.btnClicked_ChooseUser)
@@ -89,7 +91,7 @@ class mywindow(QtWidgets.QMainWindow):
         items = list(self.ProductDB.keys())
         for item in items:
             self.ui.comboBox_4.addItem(
-			    '{} {}kc/100g'.format(item, self.ProductDB[item]))
+                '{} {}kc/100g'.format(item, self.ProductDB[item]))
         self.ui.comboBox_4.setCurrentIndex(0)
 
         for item in meal_names:
@@ -119,15 +121,17 @@ class mywindow(QtWidgets.QMainWindow):
             self.ui.tableWidget.setItem(0,
                                         0,
                                         QTableWidgetItem(
-                                        self.PersonalDB.name))
+                                            self.PersonalDB.name))
+            weight_ = self.PersonalDB.desired_weight
             self.ui.tableWidget.setItem(1,
                                         0,
                                         QTableWidgetItem(
-                                        str(self.PersonalDB.desired_weight)))
+                                            str(weight_)))
+            kcal_ = self.PersonalDB.desired_kcal
             self.ui.tableWidget.setItem(2,
                                         0,
                                         QTableWidgetItem(
-                                        str(self.PersonalDB.desired_kcal)))
+                                            str(kcal_)))
         return
 
     def btnClicked_CreateUser(self):
@@ -148,7 +152,7 @@ class mywindow(QtWidgets.QMainWindow):
             return
         try:
             weight = int(weight.text())
-        except:
+        except Exception:
             QMessageBox.about(self, "Message", "Weight is not a number")
             self.hide_dayinfo_layout()
             return
@@ -161,7 +165,7 @@ class mywindow(QtWidgets.QMainWindow):
             return
         try:
             kilocalories = int(kilocalories.text())
-        except:
+        except Exception:
             QMessageBox.about(self, "Message", "Kilocalories is not a number")
             self.hide_dayinfo_layout()
             return
@@ -232,7 +236,7 @@ class mywindow(QtWidgets.QMainWindow):
             return
         try:
             kc = int(kc)
-        except:
+        except Exception:
             return
         self.ProductDB[product_name] = kc
         self.ui.comboBox_4.addItem(
@@ -286,7 +290,7 @@ class mywindow(QtWidgets.QMainWindow):
                         self.ui.tableWidget1.setItem(i_row,
                                                      1,
                                                      QTableWidgetItem(
-													 i_product.product_name))
+                                                     i_product.product_name))
                         self.ui.tableWidget1.setItem(i_row,
                                                      2,
                                                      QTableWidgetItem(
@@ -304,18 +308,19 @@ class mywindow(QtWidgets.QMainWindow):
             self.ui.tableWidget1.setItem(i_row,
                                          2,
                                          QTableWidgetItem(
-                                         str(self.CurrentDay.total)))
+                                             str(self.CurrentDay.total)))
+            kcal_ = self.PersonalDB.desired_kcal
             self.ui.tableWidget1.setItem(i_row,
                                          1,
                                          QTableWidgetItem(
-                                         'Remain {0:9.1f} / {1}'.format(
-                                         max(0,
-                                         self.PersonalDB.desired_kcal - \
-                                         self.CurrentDay.total),
-                                         self.PersonalDB.desired_kcal)))
+                                             'Remain {0:9.1f} / {1}'.format(
+                                                 max(0,
+                                                     kcal_ - \
+                                                     self.CurrentDay.total),
+                                                     kcal_)))
             header = self.ui.tableWidget1.horizontalHeader()
             header.setSectionResizeMode(
-			    QtWidgets.QHeaderView.ResizeToContents)
+                QtWidgets.QHeaderView.ResizeToContents)
             header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         return
 

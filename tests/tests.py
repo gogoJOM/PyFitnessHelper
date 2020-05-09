@@ -1,7 +1,7 @@
 try:
     from PyFitnessPackage.utils import FHDay, FHProduct
-    from PyFitnessPackage.FHDataBase import FHProductsDataBase,
-                                            FHPersonalDataBase
+    from PyFitnessPackage.FHDataBase import FHProductsDataBase
+    from PyFitnessPackage.FHDataBase import FHPersonalDataBase
 except Exception:
     import sys
     sys.path.append('PyFitnessPackage/')
