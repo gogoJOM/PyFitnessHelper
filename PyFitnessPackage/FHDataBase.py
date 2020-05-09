@@ -73,15 +73,15 @@ class FHPersonalDataBase(FHDataBase):
                 file.write('{} | '.format(key))
                 if 'Breakfast' in self.database[key].storage.keys():
                     for breakfast in \
-                        self.database[key].storage['Breakfast'].keys():
-                            file.write('{}_{}_{},'.format(
-                                breakfast.product_name,
-                                breakfast.product_company,
-                                breakfast.value))
+                            self.database[key].storage['Breakfast'].keys():
+                        file.write('{}_{}_{},'.format(
+                            breakfast.product_name,
+                            breakfast.product_company,
+                            breakfast.value))
                 file.write(' | ')
                 if 'Lunch' in self.database[key].storage.keys():
                     for breakfast in \
-                        self.database[key].storage['Lunch'].keys():
+                            self.database[key].storage['Lunch'].keys():
                         file.write('{}_{}_{},'.format(
                             breakfast.product_name,
                             breakfast.product_company,
@@ -89,7 +89,7 @@ class FHPersonalDataBase(FHDataBase):
                 file.write(' | ')
                 if 'Dinner' in self.database[key].storage.keys():
                     for breakfast in \
-                        self.database[key].storage['Dinner'].keys():
+                            self.database[key].storage['Dinner'].keys():
                         file.write('{}_{}_{},'.format(
                             breakfast.product_name,
                             breakfast.product_company,
@@ -97,7 +97,7 @@ class FHPersonalDataBase(FHDataBase):
                 file.write(' | ')
                 if 'Snacks' in self.database[key].storage.keys():
                     for breakfast in \
-                        self.database[key].storage['Snacks'].keys():
+                            self.database[key].storage['Snacks'].keys():
                         file.write('{}_{}_{},'.format(
                             breakfast.product_name,
                             breakfast.product_company,

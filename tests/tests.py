@@ -1,7 +1,8 @@
 try:
     from PyFitnessPackage.utils import FHDay, FHProduct
-    from PyFitnessPackage.FHDataBase import FHProductsDataBase, FHPersonalDataBase
-except:
+    from PyFitnessPackage.FHDataBase import FHProductsDataBase,
+                                            FHPersonalDataBase
+except Exception:
     import sys
     sys.path.append('PyFitnessPackage/')
     from utils import FHDay, FHProduct
