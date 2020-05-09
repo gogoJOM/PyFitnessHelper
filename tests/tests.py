@@ -1,6 +1,12 @@
-from utils import FHDay, FHProduct
-from FHDataBase import FHProductsDataBase, FHPersonalDataBase
-
+try:
+	from PyFitnessPackage.utils import FHDay, FHProduct
+	from PyFitnessPackage.FHDataBase import FHProductsDataBase, FHPersonalDataBase
+except:
+	import sys
+	sys.path.append('PyFitnessPackage/')
+	from utils import FHDay, FHProduct
+	from FHDataBase import FHProductsDataBase, FHPersonalDataBase
+	
 def test_FHProduct_nocompany():
     product = FHProduct("SomeProduct", 99)
 

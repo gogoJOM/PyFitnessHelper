@@ -1,5 +1,5 @@
-from FHDataBase import FHProductsDataBase, FHPersonalDataBase
-from utils import FHProduct, FHDay, SaveUsernames
+from PyFitnessPackage.FHDataBase import FHProductsDataBase, FHPersonalDataBase
+from PyFitnessPackage.utils import FHProduct, FHDay, SaveUsernames
 
 def ProductsDBExample_SimpleCompanyProduct(a_DataBase):
     product_name = "gr"

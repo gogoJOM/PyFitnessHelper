@@ -1,10 +1,18 @@
-from main_window import *
-import sys
-from PyQt5.QtWidgets import QMessageBox, QFrame, QTableWidgetItem
-from FHDataBase import FHProductsDataBase, FHPersonalDataBase
-from utils import FHProduct, FHDay, LoadUsernames, SaveUsernames
-import datetime
-
+try:
+	from main_window import *
+	import sys
+	from PyQt5.QtWidgets import QMessageBox, QFrame, QTableWidgetItem
+	from FHDataBase import FHProductsDataBase, FHPersonalDataBase
+	from utils import FHProduct, FHDay, LoadUsernames, SaveUsernames
+	import datetime
+except:
+	from PyFitnessPackage.main_window import *
+	import sys
+	from PyQt5.QtWidgets import QMessageBox, QFrame, QTableWidgetItem
+	from PyFitnessPackage.FHDataBase import FHProductsDataBase, FHPersonalDataBase
+	from PyFitnessPackage.utils import FHProduct, FHDay, LoadUsernames, SaveUsernames
+	import datetime
+	
 row_names = ('Name', 'Desired Weight', 'Kilocalories (per day)')
 meal_names = ('Breakfast', 'Lunch', 'Dinner', 'Snacks')
 
@@ -268,7 +276,7 @@ class mywindow(QtWidgets.QMainWindow):
             header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         return
 
-if __name__ == "__main__":
+def run_helper():
     app = QtWidgets.QApplication([])
     application = mywindow()
     application.show()

@@ -1,6 +1,9 @@
 import os
-from utils import FHDay, FHProduct
-
+try:
+	from utils import FHDay, FHProduct
+except:
+	from PyFitnessPackage.utils import FHDay, FHProduct
+	
 class FHDataBase:
     def __init__(self):
         self.database = {}

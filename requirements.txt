@@ -1,2 +1,2 @@
-pyqt==5.9.2
+pyqt5
 pytest==3.8.0
