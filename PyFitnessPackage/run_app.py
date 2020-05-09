@@ -1,17 +1,19 @@
 try:
-    from main_window import *
+    from main_window import Ui_MainWindow
     from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
     from FHDataBase import FHProductsDataBase, FHPersonalDataBase
     from utils import FHProduct, FHDay, LoadUsernames, SaveUsernames
+    from PyQt5 import QtWidgets
     import datetime
 except Exception:
-    from PyFitnessPackage.main_window import *
+    from PyFitnessPackage.main_window import Ui_MainWindow
     from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
     from PyFitnessPackage.FHDataBase import FHProductsDataBase
     from PyFitnessPackage.FHDataBase import FHPersonalDataBase
     from PyFitnessPackage.utils import FHProduct, FHDay
     from PyFitnessPackage.utils import LoadUsernames, SaveUsernames
     import datetime
+    from PyQt5 import QtWidgets
 
 row_names = ('Name', 'Desired Weight', 'Kilocalories (per day)')
 meal_names = ('Breakfast', 'Lunch', 'Dinner', 'Snacks')
@@ -287,14 +289,16 @@ class mywindow(QtWidgets.QMainWindow):
                                                  QTableWidgetItem(meal))
                     total = 0
                     for i_product in self.CurrentDay.storage[meal].keys():
+                        pr_name = i_product.product_name
+                        pr_val = i_product.value
                         self.ui.tableWidget1.setItem(i_row,
                                                      1,
                                                      QTableWidgetItem(
-                                                     i_product.product_name))
+                                                         pr_name))
                         self.ui.tableWidget1.setItem(i_row,
                                                      2,
                                                      QTableWidgetItem(
-                                                     str(i_product.value)))
+                                                         str(pr_val)))
                         total += i_product.value
                         i_row += 1
                     self.ui.tableWidget1.setItem(i_row,
@@ -315,9 +319,9 @@ class mywindow(QtWidgets.QMainWindow):
                                          QTableWidgetItem(
                                              'Remain {0:9.1f} / {1}'.format(
                                                  max(0,
-                                                     kcal_ - \
+                                                     kcal_ - 
                                                      self.CurrentDay.total),
-                                                     kcal_)))
+                                                 kcal_)))
             header = self.ui.tableWidget1.horizontalHeader()
             header.setSectionResizeMode(
                 QtWidgets.QHeaderView.ResizeToContents)
