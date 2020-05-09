@@ -250,7 +250,6 @@ class mywindow(QtWidgets.QMainWindow):
                     num_each_meal.append(0)
 
             num_rows += sum(num_each_meal)
-            self.ui.tableWidget1.clear()
             self.ui.tableWidget1.setRowCount(num_rows)
             self.ui.tableWidget1.verticalHeader().setVisible(False)
             i_row = 0
