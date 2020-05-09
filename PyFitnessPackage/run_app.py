@@ -319,7 +319,7 @@ class mywindow(QtWidgets.QMainWindow):
                                          QTableWidgetItem(
                                              'Remain {0:9.1f} / {1}'.format(
                                                  max(0,
-                                                     kcal_ - 
+                                                     kcal_ -
                                                      self.CurrentDay.total),
                                                  kcal_)))
             header = self.ui.tableWidget1.horizontalHeader()
