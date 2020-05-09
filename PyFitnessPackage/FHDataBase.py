@@ -1,9 +1,10 @@
 import os
 try:
-	from utils import FHDay, FHProduct
+    from utils import FHDay, FHProduct
 except:
-	from PyFitnessPackage.utils import FHDay, FHProduct
-	
+    from PyFitnessPackage.utils import FHDay, FHProduct
+
+
 class FHDataBase:
     def __init__(self):
         self.database = {}
@@ -21,6 +22,7 @@ class FHDataBase:
 
     def keys(self):
         return self.database.keys()
+
 
 class FHProductsDataBase(FHDataBase):
     def GetKey(self, a_ProductName, a_ProductCompany=None):
@@ -46,6 +48,7 @@ class FHProductsDataBase(FHDataBase):
         except IOError:
             print("Making new product database")
 
+
 class FHPersonalDataBase(FHDataBase):
     def __init__(self, name, desired_kcal=1000, desired_weight=100):
         FHDataBase.__init__(self)
@@ -68,22 +71,39 @@ class FHPersonalDataBase(FHDataBase):
             for key in self.database.keys():
                 file.write('{} | '.format(key))
                 if 'Breakfast' in self.database[key].storage.keys():
-                    for breakfast in self.database[key].storage['Breakfast'].keys():
-                        file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
+                    for breakfast in \
+                        self.database[key].storage['Breakfast'].keys():
+                        file.write('{}_{}_{},'.format(
+                            breakfast.product_name,
+                            breakfast.product_company,
+                            breakfast.value))
                 file.write(' | ')
                 if 'Lunch' in self.database[key].storage.keys():
-                    for breakfast in self.database[key].storage['Lunch'].keys():
-                        file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
+                    for breakfast in \
+                        self.database[key].storage['Lunch'].keys():
+                        file.write('{}_{}_{},'.format(
+                            breakfast.product_name,
+                            breakfast.product_company,
+                            breakfast.value))
                 file.write(' | ')
                 if 'Dinner' in self.database[key].storage.keys():
-                    for breakfast in self.database[key].storage['Dinner'].keys():
-                        file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
+                    for breakfast in \
+                        self.database[key].storage['Dinner'].keys():
+                        file.write('{}_{}_{},'.format(
+                            breakfast.product_name,
+                            breakfast.product_company,
+                            breakfast.value))
                 file.write(' | ')
                 if 'Snacks' in self.database[key].storage.keys():
-                    for breakfast in self.database[key].storage['Snacks'].keys():
-                        file.write('{}_{}_{},'.format(breakfast.product_name, breakfast.product_company, breakfast.value))
+                    for breakfast in \
+                        self.database[key].storage['Snacks'].keys():
+                        file.write('{}_{}_{},'.format(
+                            breakfast.product_name,
+                            breakfast.product_company,
+                            breakfast.value))
                 file.write(' | ')
-                file.write('{} | {}\n'.format(self.database[key].total, self.database[key].weight))
+                file.write('{} | {}\n'.format(
+                    self.database[key].total, self.database[key].weight))
 
     def Open(self):
         try:
@@ -93,10 +113,14 @@ class FHPersonalDataBase(FHDataBase):
                     line = line.rstrip('\n')
                     if i == 0:
                         vls = line.split(' ')
-                        self.desired_kcal, self.desired_weight = int(vls[0]), int(vls[1])
+                        self.desired_kcal = int(vls[0])
+                        self.desired_weight = int(vls[1])
                         continue
                     parts = line.split(' | ')
-                    key, breakfast, lunch, dinner, snacks, value, weight = parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]
+                    key, breakfast = parts[0], parts[1]
+                    lunch, dinner = parts[2], parts[3]
+                    snacks, value, weight = parts[4], parts[5], parts[6]
+
                     try:
                         weight = int(weight)
                     except:
@@ -107,42 +131,51 @@ class FHPersonalDataBase(FHDataBase):
                     for product in brkfst:
                         if len(product) > 0:
                             components = product.split('_')
-                            name, company, calories = components[0], components[1], components[2]
+                            name = components[0]
+                            company = components[1]
+                            calories = components[2]
                             if company == 'None':
                                 company = None
-                            self.database[key].AddBreakfast(FHProduct(name, float(calories), company))
+                            self.database[key].AddBreakfast(
+                                FHProduct(name, float(calories), company))
 
                     brkfst = lunch.split(',')
                     for product in brkfst:
                         if len(product) > 0:
                             components = product.split('_')
-                            name, company, calories = components[0], components[1], components[2]
+                            name = components[0]
+                            company = components[1]
+                            calories = components[2]
                             if company == 'None':
                                 company = None
-                            self.database[key].AddLunch(FHProduct(name, float(calories), company))
+                            self.database[key].AddLunch(
+                                FHProduct(name, float(calories), company))
 
                     brkfst = dinner.split(',')
                     for product in brkfst:
                         if len(product) > 0:
                             components = product.split('_')
-                            name, company, calories = components[0], components[1], components[2]
+                            name = components[0]
+                            company = components[1]
+                            calories = components[2]
                             if company == 'None':
                                 company = None
-                            self.database[key].AddDinner(FHProduct(name, float(calories), company))
+                            self.database[key].AddDinner(
+                                FHProduct(name, float(calories), company))
 
                     brkfst = snacks.split(',')
                     for product in brkfst:
                         if len(product) > 0:
                             components = product.split('_')
-                            name, company, calories = components[0], components[1], components[2]
+                            name = components[0]
+                            company = components[1]
+                            calories = components[2]
                             if company == 'None':
                                 company = None
-                            self.database[key].AddSnack(FHProduct(name, float(calories), company))
+                            self.database[key].AddSnack(
+                                FHProduct(name, float(calories), company))
 
                     self.database[key].total = float(value)
                     # self.database[key].weight = weight
         except IOError:
             print("Making new personal database for {}".format(self.name))
-
-gProductDatabase = FHProductsDataBase()
-gPersonalDatabase = FHPersonalDataBase("username")

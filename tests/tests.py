@@ -1,12 +1,13 @@
 try:
-	from PyFitnessPackage.utils import FHDay, FHProduct
-	from PyFitnessPackage.FHDataBase import FHProductsDataBase, FHPersonalDataBase
+    from PyFitnessPackage.utils import FHDay, FHProduct
+    from PyFitnessPackage.FHDataBase import FHProductsDataBase, FHPersonalDataBase
 except:
-	import sys
-	sys.path.append('PyFitnessPackage/')
-	from utils import FHDay, FHProduct
-	from FHDataBase import FHProductsDataBase, FHPersonalDataBase
-	
+    import sys
+    sys.path.append('PyFitnessPackage/')
+    from utils import FHDay, FHProduct
+    from FHDataBase import FHProductsDataBase, FHPersonalDataBase
+
+
 def test_FHProduct_nocompany():
     product = FHProduct("SomeProduct", 99)
 
@@ -16,6 +17,7 @@ def test_FHProduct_nocompany():
     str_representation = str(product)
 
     assert str_representation == "SomeProduct (99)"
+
 
 def test_FHProduct_normal():
     product = FHProduct("SomeProduct", 99, "SomeCompany")
@@ -54,6 +56,7 @@ def test_FHDay_breakfast():
     assert str(day.breakfast[1]) == 'B2Product (30)'
     assert day.total == 50
 
+
 def test_FHDay_lunch():
     day = FHDay("10.10.2010", 200)
 
@@ -79,6 +82,7 @@ def test_FHDay_lunch():
     assert str(day.lunch[0]) == 'LProduct (40)'
     assert str(day.lunch[1]) == 'L2Product (50)'
     assert day.total == 90
+
 
 def test_FHDay_dinner():
     day = FHDay("10.10.2010", 200)
@@ -106,6 +110,7 @@ def test_FHDay_dinner():
     assert str(day.dinner[1]) == 'D2Product (130)'
     assert day.total == 250
 
+
 def test_FHDay_snack():
     day = FHDay("10.10.2010", 200)
 
@@ -131,6 +136,7 @@ def test_FHDay_snack():
     assert str(day.snacks[0]) == 'SProduct (220)'
     assert str(day.snacks[1]) == 'S2Product (230)'
     assert day.total == 450
+
 
 def test_FHDay_full():
     day = FHDay("10.10.2010", 200)
@@ -199,11 +205,12 @@ def test_FHDay_full():
     key_breakfast = list(storage['Breakfast'].keys())
     assert len(key_breakfast) == 1
     assert str(key_breakfast[0]) == 'BProduct (20)'
-    assert storage['Breakfast'][key_breakfast[0]] == 20 
+    assert storage['Breakfast'][key_breakfast[0]] == 20
+
 
 def test_FHProductsDataBase():
     base = FHProductsDataBase()
-    
+
     product_name, product_company = "Product", "Company"
     key = base.GetKey(product_name, product_company)
 
@@ -211,7 +218,7 @@ def test_FHProductsDataBase():
 
     calories = base[key]
 
-    assert calories == None
+    assert calories is None
 
     if calories is None:
         new_calories = 500
@@ -228,8 +235,9 @@ def test_FHProductsDataBase():
     keys = list(base.keys())
 
     assert len(keys) == 2
-    assert ('Product_Company' in keys) == True
-    assert ('Product2_Company2' in keys) == True
+    assert ('Product_Company' in keys) is True
+    assert ('Product2_Company2' in keys) is True
+
 
 def test_FHPersonalDataBase():
     base = FHPersonalDataBase("TestName", 2000, 80)

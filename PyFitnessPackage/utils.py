@@ -1,11 +1,12 @@
 import os
 
+
 class FHProduct:
     def __init__(self, a_ProductName, a_Calories, a_ProductCompany=None):
         self.product_name = a_ProductName
         self.product_company = a_ProductCompany
         self.value = a_Calories
-        
+
         if self.product_company is not None:
             self.key = a_ProductName + '_' + a_ProductCompany
         else:
@@ -16,6 +17,7 @@ class FHProduct:
 
     def __repr__(self):
         return str(self)
+
 
 class FHDay:
     def __init__(self, a_Date=None, a_Weight=None):
@@ -39,7 +41,7 @@ class FHDay:
         if 'Breakfast' in self.storage.keys():
             self.storage['Breakfast'][a_Product] = a_Product.value
         else:
-            self.storage['Breakfast'] = {a_Product : a_Product.value}
+            self.storage['Breakfast'] = {a_Product: a_Product.value}
 
     def AddLunch(self, a_Product):
         # a_Product of type FHProduct
@@ -50,7 +52,7 @@ class FHDay:
         if 'Lunch' in self.storage.keys():
             self.storage['Lunch'][a_Product] = a_Product.value
         else:
-            self.storage['Lunch'] = {a_Product : a_Product.value}
+            self.storage['Lunch'] = {a_Product: a_Product.value}
 
     def AddDinner(self, a_Product):
         # a_Product of type FHProduct
@@ -61,7 +63,7 @@ class FHDay:
         if 'Dinner' in self.storage.keys():
             self.storage['Dinner'][a_Product] = a_Product.value
         else:
-            self.storage['Dinner'] = {a_Product : a_Product.value}
+            self.storage['Dinner'] = {a_Product: a_Product.value}
 
     def AddSnack(self, a_Product):
         # a_Product of type FHProduct
@@ -72,7 +74,7 @@ class FHDay:
         if 'Snacks' in self.storage.keys():
             self.storage['Snacks'][a_Product] = a_Product.value
         else:
-            self.storage['Snacks'] = {a_Product : a_Product.value}
+            self.storage['Snacks'] = {a_Product: a_Product.value}
 
     def SetWeight(self, a_Weight):
         self.weight = a_Weight
@@ -92,15 +94,17 @@ TOTAL: {}.'.format(self.breakfast, self.breakfast_sum,
     def __repr__(self):
         return str(self)
 
+
 def LoadUsernames():
     try:
         with open('tmp/usernames.txt', 'r') as file:
             usernames = []
             for line in file:
-               usernames.append(line.rstrip('\n'))
+                usernames.append(line.rstrip('\n'))
         return usernames
     except IOError:
         return []
+
 
 def SaveUsernames(a_Usernames):
     if not os.path.exists('tmp'):
@@ -112,15 +116,21 @@ def SaveUsernames(a_Usernames):
 
 def PrintConsoleInfo():
     print('Welcome to FitnessHelper, console version.')
-    print('If you would like to add information about food you have eaten, type \'ADD\' and press Enter.')
+    print('If you would like to add information about \
+	        food you have eaten, type \'ADD\' and press Enter.')
     print('To stop adding type 0 and press Enter.')
-    print('If you would like to see information about food you have eaten at some date, type \'SHOW\' and press Enter.')
-    print('If you would like to stop everything, type \'END\' and press Enter.')
+    print('If you would like to see information about food \
+	        you have eaten at some date, type \'SHOW\' and press Enter.')
+    print('If you would like to stop everything, type \'END\' \
+	        and press Enter.')
+
 
 def PrintAddInfo():
     print('Your input string should be like:')
-    print('<date (\'03.03.20\')> <breakfast (\'B\') / lunch (\'L\') / snack (\'S\') / dinner (\'D\') > \
+    print('<date (\'03.03.20\')> <breakfast (\'B\') / \
+	        lunch (\'L\') / snack (\'S\') / dinner (\'D\') > \
 <product name> <product company> (optional) <calories for 100g> <weight>')
+
 
 def PrintShowInfo():
     print('Your input string should be like:')

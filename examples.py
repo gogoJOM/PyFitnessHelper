@@ -1,6 +1,7 @@
 from PyFitnessPackage.FHDataBase import FHProductsDataBase, FHPersonalDataBase
 from PyFitnessPackage.utils import FHProduct, FHDay, SaveUsernames
 
+
 def ProductsDBExample_SimpleCompanyProduct(a_DataBase):
     product_name = "gr"
     product_company = "Mi"
@@ -12,9 +13,10 @@ def ProductsDBExample_SimpleCompanyProduct(a_DataBase):
     if calories is None:
         new_calories = 220
         a_DataBase[key] = new_calories
-    
+
     print(key, a_DataBase[key])
     print()
+
 
 def ProductsDBExample_SimpleProduct(a_DataBase):
     product_name = "Beef"
@@ -34,10 +36,11 @@ def ProductsDBExample_SimpleProduct(a_DataBase):
     if calories is None:
         new_calories = 300
         a_DataBase[key] = new_calories
-    
+
     print(key, a_DataBase[key])
     print()
-   
+
+
 def DayExample():
     day = FHDay("03.03.20", 80)
 
@@ -63,10 +66,12 @@ def DayExample():
 
     return day
 
+
 def PersonalDBExample(a_DataBase, day):
     a_DataBase[day.date] = day
-    
+
     a_DataBase.PrintInfo(day.date)
+
 
 if __name__ == "__main__":
     DataBase = FHProductsDataBase()

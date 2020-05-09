@@ -1,13 +1,4 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'main_window.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.0
-#
-# WARNING! All changes made in this file will be lost!
-
-
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 
 class Ui_MainWindow(object):
@@ -101,7 +92,8 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.comboBox_2, 0, 0, 1, 7)
         self.tableWidget1 = QtWidgets.QTableWidget(self.frame)
         self.tableWidget1.setAutoScroll(False)
-        self.tableWidget1.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tableWidget1.setEditTriggers(
+		    QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget1.setObjectName("tableWidget1")
         self.tableWidget1.setColumnCount(0)
         self.tableWidget1.setRowCount(0)
