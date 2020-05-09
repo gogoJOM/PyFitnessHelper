@@ -15,6 +15,9 @@ setuptools.setup(
     long_description=description,
     long_description_content_type="text/markdown",
     url="https://github.com/gogoJOM/PyFitnessHelper",
+	packages=setuptools.find_packages(
+        exclude=["tests.py"]
+    ),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
