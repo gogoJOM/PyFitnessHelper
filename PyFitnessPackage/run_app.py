@@ -194,6 +194,7 @@ class mywindow(QtWidgets.QMainWindow):
         return
 
     def show_daysDB(self):
+        self.ui.comboBox_2.clear()
         if self.PersonalDB is not None:
             days = list(self.PersonalDB.keys())
             now = datetime.datetime.now()
@@ -275,6 +276,8 @@ class mywindow(QtWidgets.QMainWindow):
 
         if self.CurrentDay.weight is not None:
             self.ui.spinBox_2.setValue(self.CurrentDay.weight)
+        else:
+            self.ui.spinBox_2.setValue(0)
 
         if self.PersonalDB is not None and self.CurrentDay is not None:
             num_rows = 1
