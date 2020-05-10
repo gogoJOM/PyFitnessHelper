@@ -122,7 +122,7 @@ class Ui_MainWindow(object):
         self.pushButton.adjustSize()
         self.label.setText(_translate("MainWindow", _("or")))
         self.label.adjustSize()
-        self.pushButton_2.setText(_translate("MainWindow", 
+        self.pushButton_2.setText(_translate("MainWindow",
                                              _("Create new User")))
         self.pushButton_2.adjustSize()
         self.label_6.setText(_translate("MainWindow", _("Create new product")))
