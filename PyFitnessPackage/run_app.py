@@ -108,7 +108,7 @@ class mywindow(QtWidgets.QMainWindow):
                 '{} {}kc/100g'.format(item, self.ProductDB[item]))
         self.ui.comboBox_4.setCurrentIndex(0)
 
-        for item in key_meals:
+        for item in meal_names:
             self.ui.comboBox_3.addItem(item)
         self.ui.comboBox_3.setCurrentIndex(0)
 
@@ -280,7 +280,7 @@ class mywindow(QtWidgets.QMainWindow):
             num_rows = 1
             num_each_meal = []
 
-            for meal in meal_names:
+            for meal in key_meals:
                 if meal in self.CurrentDay.storage:
                     num_each_meal.append(
                         0 if len(self.CurrentDay.storage[meal]) == 0
