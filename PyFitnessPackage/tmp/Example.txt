@@ -1,3 +1,4 @@
 1300 50
 7-5-2020 | Egg_None_190.0,Apple_None_71.0, | Fish_None_220.0,Rice_None_153.0, | Avocado_None_93.0,Tomato_None_15.8,Pork_None_354.0, | Banana_None_111.0,Cracker_None_80.0, | 1287.8 | 54
-8-5-2020 | Milk 1%_None_63.0,Banana_None_81.0, | Chicken_None_330.0,Avocado_None_111.5,Tomato_None_9.5, | Beef_None_274.5,Rice_None_142.8, | Apple_None_69.0, | 1081.3 | 53
+8-5-2020 | Milk 1%_None_63.0,Banana_None_81.0, | Chicken_None_330.0,Avocado_None_111.5,Tomato_None_9.5, | Beef_None_274.5,Rice_None_142.8, | Apple_None_69.0,Yoghurt 1%_None_61.2, | 1142.5 | 53
+10-5-2020 |  |  | Beef_None_183.0, |  | 183.0 | 0

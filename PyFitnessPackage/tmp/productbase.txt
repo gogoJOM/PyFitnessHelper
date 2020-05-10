@@ -11,3 +11,4 @@ Egg|157
 Fish|120
 Rice|357
 Cracker|320
+Carbonara|390
