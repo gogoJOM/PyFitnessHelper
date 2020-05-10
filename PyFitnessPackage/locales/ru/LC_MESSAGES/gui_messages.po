@@ -64,7 +64,7 @@ msgstr "Текущий вес"
 
 #: PyFitnessPackage/main_window.py:129
 msgid "Meal time"
-msgstr "Тип приема пищи"
+msgstr "Тип приема\n пищи"
 
 #: PyFitnessPackage/main_window.py:130
 msgid "Amount (gr)"
@@ -132,7 +132,7 @@ msgstr "Ккал должно быть числом"
 
 #: PyFitnessPackage/run_app.py:250
 msgid "kc/100g"
-msgstr ""
+msgstr "Ккал/100гр"
 
 #: PyFitnessPackage/run_app.py:265
 msgid "Product names"
