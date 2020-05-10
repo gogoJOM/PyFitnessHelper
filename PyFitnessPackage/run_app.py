@@ -155,13 +155,17 @@ class mywindow(QtWidgets.QMainWindow):
             self.hide_dayinfo_layout()
             return
         if name.text() in self.UserNames:
-            QMessageBox.about(self, "Message", _("This user name already exist"))
+            QMessageBox.about(self,
+                              "Message",
+                              _("This user name already exist"))
             self.hide_dayinfo_layout()
             return
         name = name.text()
         weight = self.ui.tableWidget.item(1, 0)
         if weight is None or weight.text() == '':
-            QMessageBox.about(self, "Message", _("Please, fill desired weight"))
+            QMessageBox.about(self,
+                              "Message",
+                              _("Please, fill desired weight"))
             self.hide_dayinfo_layout()
             return
         try:
@@ -174,13 +178,16 @@ class mywindow(QtWidgets.QMainWindow):
         if kilocalories is None or kilocalories.text() == '':
             QMessageBox.about(self,
                               "Message",
-                              _("Please, fill expected amount of kilocalories"))
+                              _("Please, fill \
+                                  expected amount of kilocalories"))
             self.hide_dayinfo_layout()
             return
         try:
             kilocalories = int(kilocalories.text())
         except Exception:
-            QMessageBox.about(self, "Message", _("Kilocalories is not a number"))
+            QMessageBox.about(self,
+                              "Message",
+                              _("Kilocalories is not a number"))
             self.hide_dayinfo_layout()
             return
         if self.PersonalDB is not None:

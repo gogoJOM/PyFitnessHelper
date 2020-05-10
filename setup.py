@@ -17,7 +17,7 @@ setuptools.setup(
     url="https://github.com/gogoJOM/PyFitnessHelper",
     packages=setuptools.find_packages(),
     package_data={
-        'PyFitnessPackage': ['tmp/*', 
+        'PyFitnessPackage': ['tmp/*',
                              'locales/ru/LC_MESSAGES/*']
     },
     include_package_data=True,

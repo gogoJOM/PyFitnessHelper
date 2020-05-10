@@ -5,6 +5,7 @@ gettext.bindtextdomain("gui_messages", "locales")
 gettext.textdomain("gui_messages")
 _ = gettext.gettext
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("Fitness Helper")
@@ -121,7 +122,8 @@ class Ui_MainWindow(object):
         self.pushButton.adjustSize()
         self.label.setText(_translate("MainWindow", _("or")))
         self.label.adjustSize()
-        self.pushButton_2.setText(_translate("MainWindow", _("Create new User")))
+        self.pushButton_2.setText(_translate("MainWindow", 
+                                             _("Create new User")))
         self.pushButton_2.adjustSize()
         self.label_6.setText(_translate("MainWindow", _("Create new product")))
         self.label_6.adjustSize()
