@@ -76,7 +76,7 @@ make html
 
 Для этого нужно заполнить все поля таблицы в левом верхнем углу окна и нажать кнопку "Create new user".
 
-![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/new_user_info.png "Create new user")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/new_user_info.png "Create new user")
 
 Если пользователь с таким именем существует, приложение выдаст информацию об ошибке:
 
