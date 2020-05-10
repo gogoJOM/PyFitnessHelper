@@ -15,8 +15,19 @@ except Exception:
     import datetime
     from PyQt5 import QtWidgets
 
-row_names = ('Name', 'Desired Weight', 'Kilocalories (per day)')
-meal_names = ('Breakfast', 'Lunch', 'Dinner', 'Snacks')
+import gettext
+import os
+
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
+gettext.bindtextdomain("gui_messages", "locales")
+gettext.textdomain("gui_messages")
+_ = gettext.gettext
+
+row_names = (_('Name'), _('Desired Weight'), _('Kilocalories (per day)'))
+meal_names = (_('Breakfast'), _('Lunch'), _('Dinner'), _('Snacks'))
 
 
 class mywindow(QtWidgets.QMainWindow):
@@ -29,7 +40,7 @@ class mywindow(QtWidgets.QMainWindow):
         self.UserNames = LoadUsernames()
         self.PersonalDB = None
         self.CurrentDay = None
-        self.ui.comboBox.addItem('New')
+        self.ui.comboBox.addItem(_('New'))
         for username in self.UserNames:
             self.ui.comboBox.addItem(username)
         self.ui.comboBox.setCurrentIndex(0)
@@ -89,7 +100,7 @@ class mywindow(QtWidgets.QMainWindow):
         return
 
     def init_product_combobox(self):
-        self.ui.comboBox_4.addItem('New')
+        self.ui.comboBox_4.addItem(_('New'))
         items = list(self.ProductDB.keys())
         for item in items:
             self.ui.comboBox_4.addItem(
@@ -107,7 +118,7 @@ class mywindow(QtWidgets.QMainWindow):
         if name == 'New':
             QMessageBox.about(self,
                               "Message",
-                              "Please, choose existing user")
+                              _("Please, choose existing user"))
             self.hide_dayinfo_layout()
         else:
             if self.PersonalDB is not None:
@@ -139,36 +150,36 @@ class mywindow(QtWidgets.QMainWindow):
     def btnClicked_CreateUser(self):
         name = self.ui.tableWidget.item(0, 0)
         if name is None:
-            QMessageBox.about(self, "Message", "Please, fill new user name")
+            QMessageBox.about(self, "Message", _("Please, fill new user name"))
             self.hide_dayinfo_layout()
             return
         if name.text() in self.UserNames:
-            QMessageBox.about(self, "Message", "This user name already exist")
+            QMessageBox.about(self, "Message", _("This user name already exist"))
             self.hide_dayinfo_layout()
             return
         name = name.text()
         weight = self.ui.tableWidget.item(1, 0)
         if weight is None:
-            QMessageBox.about(self, "Message", "Please, fill desired weight")
+            QMessageBox.about(self, "Message", _("Please, fill desired weight"))
             self.hide_dayinfo_layout()
             return
         try:
             weight = int(weight.text())
         except Exception:
-            QMessageBox.about(self, "Message", "Weight is not a number")
+            QMessageBox.about(self, "Message", _("Weight is not a number"))
             self.hide_dayinfo_layout()
             return
         kilocalories = self.ui.tableWidget.item(2, 0)
         if kilocalories is None:
             QMessageBox.about(self,
                               "Message",
-                              "Please, fill expected amount of kilocalories")
+                              _("Please, fill expected amount of kilocalories"))
             self.hide_dayinfo_layout()
             return
         try:
             kilocalories = int(kilocalories.text())
         except Exception:
-            QMessageBox.about(self, "Message", "Kilocalories is not a number")
+            QMessageBox.about(self, "Message", _("Kilocalories is not a number"))
             self.hide_dayinfo_layout()
             return
         if self.PersonalDB is not None:
@@ -242,7 +253,8 @@ class mywindow(QtWidgets.QMainWindow):
             return
         self.ProductDB[product_name] = kc
         self.ui.comboBox_4.addItem(
-            '{} {}kc/100g'.format(product_name, self.ProductDB[product_name]))
+            '{} {}'.format(product_name, self.ProductDB[product_name]) +
+            _('kc/100g'))
         self.ui.new_product_frame.hide()
         return
 
@@ -257,8 +269,8 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.tableWidget1.clear()
         self.ui.tableWidget1.setColumnCount(3)
         self.ui.tableWidget1.setHorizontalHeaderLabels(['',
-                                                        'Product names',
-                                                        'kc'])
+                                                        _('Product names'),
+                                                        _('kc')])
 
         if self.CurrentDay.weight is not None:
             self.ui.spinBox_2.setValue(self.CurrentDay.weight)
@@ -303,7 +315,7 @@ class mywindow(QtWidgets.QMainWindow):
                         i_row += 1
                     self.ui.tableWidget1.setItem(i_row,
                                                  1,
-                                                 QTableWidgetItem('Total'))
+                                                 QTableWidgetItem(_('Total')))
                     self.ui.tableWidget1.setItem(i_row,
                                                  2,
                                                  QTableWidgetItem(str(total)))
@@ -317,7 +329,8 @@ class mywindow(QtWidgets.QMainWindow):
             self.ui.tableWidget1.setItem(i_row,
                                          1,
                                          QTableWidgetItem(
-                                             'Remain {0:9.1f} / {1}'.format(
+                                             _("Remain") +
+                                             '{0:9.1f} / {1}'.format(
                                                  max(0,
                                                      kcal_ -
                                                      self.CurrentDay.total),

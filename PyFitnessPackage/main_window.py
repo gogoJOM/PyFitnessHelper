@@ -1,5 +1,9 @@
 from PyQt5 import QtCore, QtWidgets
+import gettext
 
+gettext.bindtextdomain("gui_messages", "locales")
+gettext.textdomain("gui_messages")
+_ = gettext.gettext
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -113,16 +117,16 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "Choose User"))
-        self.label.setText(_translate("MainWindow", "or"))
-        self.pushButton_2.setText(_translate("MainWindow", "Create new User"))
-        self.label_6.setText(_translate("MainWindow", "Create new product"))
-        self.label_7.setText(_translate("MainWindow", "Product Name"))
-        self.label_8.setText(_translate("MainWindow", "Kc / 100 g"))
-        self.pushButton_5.setText(_translate("MainWindow", "Create"))
-        self.pushButton_3.setText(_translate("MainWindow", "Add"))
-        self.label_3.setText(_translate("MainWindow", "Product"))
-        self.pushButton_4.setText(_translate("MainWindow", "Save"))
-        self.label_5.setText(_translate("MainWindow", "Current weight"))
-        self.label_2.setText(_translate("MainWindow", "Meal time"))
-        self.label_4.setText(_translate("MainWindow", "Amount (gr)"))
+        self.pushButton.setText(_translate("MainWindow", _("Choose User")))
+        self.label.setText(_translate("MainWindow", _("or")))
+        self.pushButton_2.setText(_translate("MainWindow", _("Create new User")))
+        self.label_6.setText(_translate("MainWindow", _("Create new product")))
+        self.label_7.setText(_translate("MainWindow", _("Product Name")))
+        self.label_8.setText(_translate("MainWindow", _("Kc / 100 g")))
+        self.pushButton_5.setText(_translate("MainWindow", _("Create")))
+        self.pushButton_3.setText(_translate("MainWindow", _("Add")))
+        self.label_3.setText(_translate("MainWindow", _("Product")))
+        self.pushButton_4.setText(_translate("MainWindow", _("Save")))
+        self.label_5.setText(_translate("MainWindow", _("Current weight")))
+        self.label_2.setText(_translate("MainWindow", _("Meal time")))
+        self.label_4.setText(_translate("MainWindow", _("Amount (gr)")))

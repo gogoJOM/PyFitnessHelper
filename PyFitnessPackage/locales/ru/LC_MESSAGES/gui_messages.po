@@ -1,0 +1,151 @@
+# Russian translations for PACKAGE package
+# Английские переводы для пакета PACKAGE.
+# Copyright (C) 2020 ORGANIZATION
+# artemy <artemy@artemy-virtualbox>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2020-05-09 23:51+0300\n"
+"PO-Revision-Date: 2020-05-09 23:51+0300\n"
+"Last-Translator: artemy <artemy@artemy-virtualbox>\n"
+"Language-Team: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: PyFitnessPackage/main_window.py:118
+msgid "Choose User"
+msgstr "Выбрать юзера"
+
+#: PyFitnessPackage/main_window.py:119
+msgid "or"
+msgstr "или"
+
+#: PyFitnessPackage/main_window.py:120
+msgid "Create new User"
+msgstr "Создать юзера"
+
+#: PyFitnessPackage/main_window.py:121
+msgid "Create new product"
+msgstr "Создать продукт"
+
+#: PyFitnessPackage/main_window.py:122
+msgid "Product Name"
+msgstr "Имя продукта"
+
+#: PyFitnessPackage/main_window.py:123
+msgid "Kc / 100 g"
+msgstr "Ккал / 100 гр"
+
+#: PyFitnessPackage/main_window.py:124
+msgid "Create"
+msgstr "Создать"
+
+#: PyFitnessPackage/main_window.py:125
+msgid "Add"
+msgstr "Добавить"
+
+#: PyFitnessPackage/main_window.py:126
+msgid "Product"
+msgstr "Продукт"
+
+#: PyFitnessPackage/main_window.py:127
+msgid "Save"
+msgstr "Сохранить"
+
+#: PyFitnessPackage/main_window.py:128
+msgid "Current weight"
+msgstr "Текущий вес"
+
+#: PyFitnessPackage/main_window.py:129
+msgid "Meal time"
+msgstr "Тип приема пищи"
+
+#: PyFitnessPackage/main_window.py:130
+msgid "Amount (gr)"
+msgstr "Кол-во (гр)"
+
+#: PyFitnessPackage/run_app.py:22
+msgid "Desired Weight"
+msgstr "Желаемый вес"
+
+#: PyFitnessPackage/run_app.py:22
+msgid "Kilocalories (per day)"
+msgstr "Ккал (в день)"
+
+#: PyFitnessPackage/run_app.py:22
+msgid "Name"
+msgstr "Имя"
+
+#: PyFitnessPackage/run_app.py:23
+msgid "Breakfast"
+msgstr "Завтрак"
+
+#: PyFitnessPackage/run_app.py:23
+msgid "Dinner"
+msgstr "Ужин"
+
+#: PyFitnessPackage/run_app.py:23
+msgid "Lunch"
+msgstr "Ланч"
+
+#: PyFitnessPackage/run_app.py:23
+msgid "Snacks"
+msgstr "Снэки"
+
+#: PyFitnessPackage/run_app.py:36 PyFitnessPackage/run_app.py:96
+msgid "New"
+msgstr "Новый"
+
+#: PyFitnessPackage/run_app.py:114
+msgid "Please, choose existing user"
+msgstr "Выберите юзера"
+
+#: PyFitnessPackage/run_app.py:146
+msgid "Please, fill new user name"
+msgstr "Заполните имя юзера"
+
+#: PyFitnessPackage/run_app.py:150
+msgid "This user name already exist"
+msgstr "Такой юзер уже существует"
+
+#: PyFitnessPackage/run_app.py:156
+msgid "Please, fill desired weight"
+msgstr "Заполните желаемый вес"
+
+#: PyFitnessPackage/run_app.py:162
+msgid "Weight is not a number"
+msgstr "Вес должен быть числом"
+
+#: PyFitnessPackage/run_app.py:169
+msgid "Please, fill expected amount of kilocalories"
+msgstr "Введите желаемое кол-во Ккал в день"
+
+#: PyFitnessPackage/run_app.py:175
+msgid "Kilocalories is not a number"
+msgstr "Ккал должно быть числом"
+
+#: PyFitnessPackage/run_app.py:250
+msgid "kc/100g"
+msgstr ""
+
+#: PyFitnessPackage/run_app.py:265
+msgid "Product names"
+msgstr "Названия продуктов"
+
+#: PyFitnessPackage/run_app.py:266
+msgid "kc"
+msgstr "Ккал"
+
+#: PyFitnessPackage/run_app.py:311
+msgid "Total"
+msgstr "Всего"
+
+#: PyFitnessPackage/run_app.py:325
+msgid "Remain"
+msgstr "Осталось"
