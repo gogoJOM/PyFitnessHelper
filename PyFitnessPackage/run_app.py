@@ -150,7 +150,7 @@ class mywindow(QtWidgets.QMainWindow):
 
     def btnClicked_CreateUser(self):
         name = self.ui.tableWidget.item(0, 0)
-        if name is None:
+        if name is None or name.text() == '':
             QMessageBox.about(self, "Message", _("Please, fill new user name"))
             self.hide_dayinfo_layout()
             return
@@ -160,7 +160,7 @@ class mywindow(QtWidgets.QMainWindow):
             return
         name = name.text()
         weight = self.ui.tableWidget.item(1, 0)
-        if weight is None:
+        if weight is None or weight.text() == '':
             QMessageBox.about(self, "Message", _("Please, fill desired weight"))
             self.hide_dayinfo_layout()
             return
@@ -171,7 +171,7 @@ class mywindow(QtWidgets.QMainWindow):
             self.hide_dayinfo_layout()
             return
         kilocalories = self.ui.tableWidget.item(2, 0)
-        if kilocalories is None:
+        if kilocalories is None or kilocalories.text() == '':
             QMessageBox.about(self,
                               "Message",
                               _("Please, fill expected amount of kilocalories"))
