@@ -28,6 +28,7 @@ _ = gettext.gettext
 
 row_names = (_('Name'), _('Desired Weight'), _('Kilocalories (per day)'))
 meal_names = (_('Breakfast'), _('Lunch'), _('Dinner'), _('Snacks'))
+key_meals = ('Breakfast', 'Lunch', 'Dinner', 'Snacks')
 
 
 class mywindow(QtWidgets.QMainWindow):
@@ -107,7 +108,7 @@ class mywindow(QtWidgets.QMainWindow):
                 '{} {}kc/100g'.format(item, self.ProductDB[item]))
         self.ui.comboBox_4.setCurrentIndex(0)
 
-        for item in meal_names:
+        for item in key_meals:
             self.ui.comboBox_3.addItem(item)
         self.ui.comboBox_3.setCurrentIndex(0)
 
@@ -291,14 +292,15 @@ class mywindow(QtWidgets.QMainWindow):
             self.ui.tableWidget1.setRowCount(num_rows)
             self.ui.tableWidget1.verticalHeader().setVisible(False)
             i_row = 0
-            for i_meal, meal in enumerate(meal_names):
+            for i_meal, meal in enumerate(key_meals):
                 if num_each_meal[i_meal] > 0:
                     self.ui.tableWidget1.setSpan(i_row,
                                                  0,
                                                  num_each_meal[i_meal], 1)
                     self.ui.tableWidget1.setItem(i_row,
                                                  0,
-                                                 QTableWidgetItem(meal))
+                                                 QTableWidgetItem(
+                                                     meal_names[i_meal]))
                     total = 0
                     for i_product in self.CurrentDay.storage[meal].keys():
                         pr_name = i_product.product_name
