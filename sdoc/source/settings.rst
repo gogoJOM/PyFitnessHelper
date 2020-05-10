@@ -31,3 +31,10 @@
 
    python main.py
    
+Тесты
+=====
+
+Тесты запускаются с помощью модуля pytest, файл - ```PyFitnessPackage/tests.py```. Для запуска достаточно запустить команду::
+
+   pytest PyFitnessPackage/tests.py
+   

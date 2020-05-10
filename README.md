@@ -7,6 +7,7 @@
   - [Сборка пакета](#package)
   - [Запуск исходного файла](#clone)
   - [Сборка документации](#documentation)
+  - [Тесты](#tests)
 - [Выбор пользователя](#create_user)
   - [Создание нового пользователя](#new_user)
   - [Выбор уже существуещего пользователя](#choose_user)
@@ -66,7 +67,15 @@ cd sdoc
 make html
 ```
 
-Результат окажется в папке ```sdoc/build/html```
+Результат окажется в папке ```sdoc/build/html```.
+
+### Тесты <a name="tests"></a>
+
+Тесты запускаются с помощью модуля pytest, файл - ```PyFitnessPackage/tests.py```. Для запуска достаточно запустить команду:
+
+```
+pytest PyFitnessPackage/tests.py
+```
 
 ## Выбор пользователя <a name="create_user"></a>
 
