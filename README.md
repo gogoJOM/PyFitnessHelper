@@ -35,6 +35,28 @@
 
 ![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/blob/master/img/day_info1.png "Day info")
 
+### Добавление продукта в текущий день
+
+Для того, чтобы добавить новый продукт, под таблицей пользователь может выбрать время приёма пищи:
+
+![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/blob/master/img/add_product1.png "Add product")
+
+Затем выбрать продукт из уже существующих в базе данных:
+
+![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/blob/master/img/add_product2.png "Add product")
+
+Ввести употреблённое количество и нажать кнопку "Add":
+
+![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/blob/master/img/add_product3.png "Add product")
+
+После чего таблица с информацией автоматически обновится:
+
+![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/blob/master/img/add_product4.png "Add product")
+
+### Создание нового продукта
+
+### Информация о предыдущих днях
+
 Если пользователь уже пользовался приложением, у него есть возможность просмотреть информацию за предыдущий день, выбрав интересующий в верхнем правом углу:
 
 ![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/blob/master/img/days.png "Days")
