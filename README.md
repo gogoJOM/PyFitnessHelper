@@ -37,7 +37,7 @@
 
 ### Добавление продукта в текущий день
 
-Для того, чтобы добавить новый продукт, под таблицей пользователь может выбрать время приёма пищи:
+Для того, чтобы добавить новый продукт, пользователь может выбрать время приёма пищи:
 
 ![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/blob/master/img/add_product1.png "Add product")
 
@@ -54,6 +54,14 @@
 ![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/blob/master/img/add_product4.png "Add product")
 
 ### Создание нового продукта
+
+Если нужного продукта или блюда не существует в базе, пользователь может его создать. Для этого нужно выбрать продукт как "New" и нажать кнопку "Add". В результате чего появится окно, куда можно ввести данные о новом продукте.
+
+![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/blob/master/img/new_product1.png "New product")
+
+После того, как пользователь ввёл информацию о новом продукте и нажал на кнопку "Create", этот продукт добавляется в список:
+
+![alt-текст](https://github.com/gogoJOM/PyFitnessHelper/blob/master/img/new_product2.png "New product")
 
 ### Информация о предыдущих днях
 
