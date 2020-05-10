@@ -80,17 +80,17 @@ make html
 
 Если пользователь с таким именем существует, приложение выдаст информацию об ошибке:
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/warning_username.png "Error message")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/warning_username.png "Error message")
 
 Так же ошибка может возникнуть, если какое-либо поле при создании пользователя не было заполнено:
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/warning_weight.png "Error message")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/warning_weight.png "Error message")
 
 ### Выбор уже существуещего пользователя <a name="choose_user"></a>
 
 Если пользователь уже пользовался приложением, он может выбрать свой аккаунт и нажать кнопку "Choose user".
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/choose_user.png "Choose user")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/choose_user.png "Choose user")
 
 Если пользователь не был выбран (остался "New"), а кнопка нажата, пользователь опять получит информацию об ошибке.
 
@@ -99,25 +99,25 @@ make html
 Сразу после выбора/создания пользователя, загружаются поля с информацией по текущему дню и функционалом по добавлению новой информации.
 По умолчанию день выбран как текущий.
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/day_info1.png "Day info")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/day_info1.png "Day info")
 
 ### Добавление продукта в текущий день <a name="add_product"></a>
 
 Для того, чтобы добавить новый продукт, пользователь может выбрать время приёма пищи:
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/add_product1.png "Add product")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/add_product1.png "Add product")
 
 Затем выбрать продукт из уже существующих в базе данных:
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/add_product2.png "Add product")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/add_product2.png "Add product")
 
 Ввести употреблённое количество и нажать кнопку "Add":
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/add_product3.png "Add product")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/add_product3.png "Add product")
 
 После чего таблица с информацией автоматически обновится:
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/add_product4.png "Add product")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/add_product4.png "Add product")
 
 ### Создание нового продукта <a name="new_product"></a>
 
@@ -127,21 +127,21 @@ make html
 
 После того, как пользователь ввёл информацию о новом продукте и нажал на кнопку "Create", этот продукт добавляется в список:
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/new_product2.png "New product")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/new_product2.png "New product")
 
 ### Информация о предыдущих днях <a name="day_info"></a>
 
 Если пользователь уже пользовался приложением, у него есть возможность просмотреть информацию за предыдущий день, выбрав интересующий в верхнем правом углу:
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/days.png "Days")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/days.png "Days")
 
 Как только пользователь нажмёт на интересующий день, поля обновятся в соответсвии с имеющейся информацией по этому дню (в том числе и с весом по этому дню).
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/day_info2.png "Day info")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/day_info2.png "Day info")
 
 Пользователь может добавить в этот день новый продукт (или изменить вес).
 
-![](https://github.com/gogoJOM/PyFitnessHelper/tree/master/sdoc/source/_static/day_info3.png "Day info")
+![](https://github.com/gogoJOM/PyFitnessHelper/raw/master/sdoc/source/_static/day_info3.png "Day info")
 
 ## Сохренение <a name="save"></a>
 
